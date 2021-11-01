@@ -25,3 +25,22 @@ Repository contains Kubernetes manifests to define a cluster maintained by Argo 
     ```Shell
     git push --set-upstream origin main
     ```
+
+1. Create the Argo CD application that will bootstrap the cluster
+
+    ```Yaml
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+    name: gitops
+    spec:
+    destination:
+        name: ''
+        namespace: default
+        server: 'https://kubernetes.default.svc'
+    source:
+        path: gitops/apps
+        repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
+        targetRevision: main
+    project: default
+    ```
