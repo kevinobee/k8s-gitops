@@ -9,6 +9,7 @@
         "jsonpath",
         "kubectl",
         "kubernetes",
+        "metallb",
         "printf",
         "staticassets"
     ]
