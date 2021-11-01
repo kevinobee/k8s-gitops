@@ -35,12 +35,18 @@ Repository contains Kubernetes manifests to define a cluster maintained by Argo 
     name: gitops
     spec:
     destination:
-        name: ''
-        namespace: default
-        server: 'https://kubernetes.default.svc'
+      namespace: default
+      server: 'https://kubernetes.default.svc'
     source:
-        path: gitops/apps
-        repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
-        targetRevision: main
+      path: gitops/apps
+      repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
+      targetRevision: main
     project: default
+
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+      - CreateNamespace=true
     ```
