@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress-controller
 spec:
   destination:
-    namespace: ingress
+    namespace: ingress-nginx
     server: 'https://kubernetes.default.svc'
   source:
     repoURL: 'https://charts.bitnami.com/bitnami'
