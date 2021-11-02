@@ -14,7 +14,7 @@ spec:
     helm:
       parameters:
         - name: service.type
-          value: NodePort
+          value: LoadBalancer
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
