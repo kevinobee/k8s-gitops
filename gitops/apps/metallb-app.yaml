@@ -4,11 +4,9 @@ metadata:
   name: metallb
 spec:
   destination:
-    name: ''
     namespace: metallb-system
     server: 'https://kubernetes.default.svc'
   source:
-    path: ''
     repoURL: 'https://metallb.github.io/metallb'
     targetRevision: 0.11.0
     chart: metallb
