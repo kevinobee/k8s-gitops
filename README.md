@@ -4,6 +4,16 @@ Repository contains Kubernetes manifests to define a cluster maintained by Argo 
 
 ## Getting Started
 
+Either use or fork the <https://github.com/kevinobee/k8s-gitops> Git repository and then create an Argo CD application to manage the cluster using GitOps principles.
+
+```Shell
+kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
+```
+
+If you have forked the repository ensure that you update the source `repoUrl` setting in the yaml file before applying it.
+
+### Using Gitea
+
 1. Start Gitea in Kubernetes
 
     Start the local development cluster and then run the following commands:
@@ -28,24 +38,8 @@ Repository contains Kubernetes manifests to define a cluster maintained by Argo 
 
 1. Create the Argo CD application that will bootstrap the cluster
 
-```Yaml
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: gitops
-spec:
-  destination:
-    namespace: default
-    server: 'https://kubernetes.default.svc'
-  source:
-    path: gitops/apps
-    repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
-    targetRevision: main
-  project: default
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-```
+  Ensure that the source `repoUrl` setting in the yaml file contains your `BASE_HOST` address and then run the following:
+
+  ```Shell
+  kubectl -n argocd apply -f ./examples/gitea-gitops-argocd-app.yaml
+  ```
