@@ -1,0 +1,42 @@
+# A sample workflow which eyJhbGciOiJSUzI1NiIsImtpZCI6Ing5RFZQOGtsQ2Z0NW93S21HVE5yYVotOWZyVEJWX19NQXRxcVE2cEJlWXcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJkYXNoYm9hcmQtYWRtaW4tdG9rZW4tano0emwiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGFzaGJvYXJkLWFkbWluIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNmFmZDg2YzUtOGI2MC00ODExLTlhNDItZjc1ZTEzYmI5MDA2Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmRhc2hib2FyZC1hZG1pbiJ9.l9yDUbz-JvjOLl7usGcP1F6Zb5xMGuJD9VFqi3uNO3iO0UcMZEDxv2igwY8Qc2fsydSpvj9_Y-3liB0bCOsBGuXh_ZlMouGM3slUlb3NabJK6Z29AXb7kpbfOHW665o28Mn-KoaTVIuDMT2rSRnnH4Yb5635Gdg9GEtKbam_6gWfYAa-aIIAmass1n472CB1DfFrcqLMzZemeV9lrsXRYKR-K91659tdFKqm__Tq3N_EiYN5_SNu7QZPfBkZBF-PuqsPtqQDzKS7KS-jaZoH84CXGUElEQ7-NU_8uiWlpL0gZB6hVrjc85gID3gIUJ6nkw8vCmjUVsF2J8FWY9G3ugchecks out your Infrastructure as Code Configuration files,
+# such as Kubernetes, Helm & Terraform and scans them for any security issues.
+# The results are then uploaded to GitHub Security Code Scanning
+#
+# For more examples, including how to limit scans to only high-severity issues
+# and fail PR checks, see https://github.com/snyk/actions/
+
+name: Snyk Infrastructure as Code
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ main ]
+  schedule:
+    - cron: '36 23 * * 6'
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Snyk to check configuration files for security issues
+        # Snyk can be used to break the build when it detects security issues.
+        # In this case we want to upload the issues to GitHub Code Scanning
+        continue-on-error: true
+        uses: snyk/actions/iac@master
+        env:
+          # In order to use the Snyk Action you will need to have a Snyk API token.
+          # More details in https://github.com/snyk/actions#getting-your-snyk-token
+          # or you can signup for free at https://snyk.io/login
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          # Add the path to the configuration file that you would like to test.
+          # For example `deployment.yaml` for a Kubernetes deployment manifest
+          # or `main.tf` for a Terraform configuration file
+          file: your-file-to-test.yaml
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
