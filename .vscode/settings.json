@@ -12,6 +12,7 @@
         "kubernetes",
         "metallb",
         "printf",
+        "rolebinding",
         "staticassets"
     ]
 }
