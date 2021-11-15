@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: http://172.18.0.2:32322/gitea_admin/k8s-gitops.git
+    repoURL: https://github.com/kevinobee/k8s-gitops.git
     targetRevision: main
     path: gitops/argocd
   destination:
