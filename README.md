@@ -10,7 +10,7 @@ Either use or fork the <https://github.com/kevinobee/k8s-gitops> Git repository 
 kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 ```
 
-If you have forked the repository ensure that you update the source `repoUrl` setting in the yaml file before applying it.
+*Note:* If you have forked the repository ensure that you update the source `repoUrl` setting in the yaml file before applying it.
 
 ### Using Gitea
 
@@ -22,24 +22,23 @@ If you have forked the repository ensure that you update the source `repoUrl` se
     export BASE_HOST=$(kubectl get nodes -o jsonpath='{.items[].status.addresses[].address}')
     export GITEA_HOST="http://$BASE_HOST:32322"
 
-    printf "Services:\n\n"
-    printf "Gitea: ${GITEA_HOST}\n"
+    printf "\nGitea: ${GITEA_HOST}\n"
 
-    git remote add origin http://$GITEA_HOST:32322/gitea_admin/k8s-gitops.git
+    git remote add gitea http://$GITEA_HOST:32322/gitea_admin/k8s-gitops.git
     ```
 
-1. Create a `k8s-gitops` repository in Gitea
+1. Create an empty `k8s-gitops` repository in Gitea
 
-1. Push the code to Gitea from this folder
+1. Push the repository code to Gitea in the cluster
 
     ```Shell
-    git push -u origin main
+    git push -u gitea main
     ```
 
 1. Create the Argo CD application that will bootstrap the cluster
 
-  Ensure that the source `repoUrl` setting in the yaml file contains your `BASE_HOST` address and then run the following:
+    Ensure that the source `repoUrl` setting in the yaml file contains your `BASE_HOST` address and then run the following command:
 
-  ```Shell
-  kubectl -n argocd apply -f ./examples/gitea-gitops-argocd-app.yaml
-  ```
+    ```Shell
+    kubectl -n argocd apply -f ./examples/gitea-gitops-argocd-app.yaml
+    ```
