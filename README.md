@@ -14,24 +14,16 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
 ### Using Gitea
 
-1. Start Gitea in Kubernetes
+1. Start the local development cluster and then run the `./gitea.sh` script to view the url where Gitea can be accessed locally.
 
-    Start the local development cluster and then run the following commands:
+    Running the `./gitea.sh` script will setup the `BASE_HOST` and `GITEA_HOST` environment variables used in the following steps.
 
-    ```Shell
-    export BASE_HOST=$(kubectl get nodes -o jsonpath='{.items[].status.addresses[].address}')
-    export GITEA_HOST="http://$BASE_HOST:32322"
-
-    printf "\nGitea: ${GITEA_HOST}\n"
-
-    git remote add gitea http://$GITEA_HOST:32322/gitea_admin/k8s-gitops.git
-    ```
-
-1. Create an empty `k8s-gitops` repository in Gitea
+1. Login to Gitea and create an empty `k8s-gitops` repository
 
 1. Push the repository code to Gitea in the cluster
 
     ```Shell
+    git remote add gitea http://$GITEA_HOST:32322/gitea_admin/k8s-gitops.git
     git push -u gitea main
     ```
 
