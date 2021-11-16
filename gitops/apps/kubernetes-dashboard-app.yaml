@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
-    targetRevision: kubernetes-dashboard
+    targetRevision: main
     path: gitops/kubernetes-dashboard
   destination:
     server: https://kubernetes.default.svc
