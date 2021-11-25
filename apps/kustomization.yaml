@@ -4,5 +4,6 @@ kind: Kustomization
 namespace: argocd
 
 resources:
-  - ingress-nginx.yaml
-  
+  - ingress-nginx-app.yaml
+  - metallb-app.yaml
+  - metallb-load-balancer-config.yaml
