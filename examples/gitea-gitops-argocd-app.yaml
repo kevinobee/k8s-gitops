@@ -8,7 +8,7 @@ spec:
   source:
     path: apps
     repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
-    targetRevision: bootstrap-dev-cluster
+    targetRevision: main
   destination:
     namespace: gitops
     server: 'https://kubernetes.default.svc'

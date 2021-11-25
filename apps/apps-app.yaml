@@ -8,9 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
+    repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git' # 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-    path: gitops/apps
+    path: apps
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
