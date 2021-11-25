@@ -6,3 +6,4 @@ resources:
   - ingress-nginx-app.yaml
   - metallb-app.yaml
   - metallb-load-balancer-config.yaml
+  - gitea-app.yaml
