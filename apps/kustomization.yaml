@@ -3,6 +3,6 @@ kind: Kustomization
 
 namespace: argocd
 
-# resources:
-# - guestbook-ui-deployment.yaml
-# - guestbook-ui-svc.yaml
+resources:
+  - ingress-nginx.yaml
+  

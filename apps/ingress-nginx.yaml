@@ -1,20 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: apps
-  namespace: argocd
+  name: nginx-ingress-controller
 spec:
   project: default
   source:
-    path: apps
-    repoURL: 'http://172.18.0.2:32322/gitea_admin/k8s-gitops.git'
-    targetRevision: bootstrap-dev-cluster
+    repoURL: 'https://kubernetes.github.io/ingress-nginx'
+    targetRevision: 4.0.10
+    chart: ingress-nginx
   destination:
-    namespace: gitops
+    namespace: ingress-nginx
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
     automated:
       prune: true
-      selfHeal: true
