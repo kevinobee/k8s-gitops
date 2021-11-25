@@ -10,6 +10,7 @@
         "kube",
         "kubectl",
         "kubernetes",
+        "Kustomization",
         "metallb",
         "printf",
         "rolebinding",
