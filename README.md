@@ -23,7 +23,7 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 1. Push the repository code to Gitea in the cluster
 
     ```Shell
-    git remote add gitea http://$GITEA_HOST:32322/gitea_admin/k8s-gitops.git
+    git remote add gitea http://git.example.com/gitea_admin/k8s-gitops.git
     git push -u gitea main
     ```
 
