@@ -8,7 +8,9 @@ spec:
     path: apps
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-  project: default
+  destination:
+    namespace: dev
+    server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
       prune: true
