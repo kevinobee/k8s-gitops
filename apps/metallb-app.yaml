@@ -4,7 +4,7 @@ metadata:
   name: metallb
   namespace: argocd
 spec:
-  project: default
+  project: dev
   source:
     repoURL: 'https://charts.bitnami.com/bitnami'
     targetRevision: 2.5.11

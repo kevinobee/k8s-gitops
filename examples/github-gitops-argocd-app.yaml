@@ -3,9 +3,7 @@ kind: Application
 metadata:
   name: gitops
 spec:
-  destination:
-    namespace: default
-    server: 'https://kubernetes.default.svc'
+  project: dev
   source:
     path: apps
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
