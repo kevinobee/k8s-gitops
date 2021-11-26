@@ -1,10 +1,19 @@
 # k8s-gitops
 
-Repository contains Kubernetes manifests to define a cluster maintained by Argo CD.
+Repository contains Kubernetes manifests to bootstrap a Kubernetes cluster maintained by [Argo CD](https://argoproj.github.io/cd/).
+
+## Pre-requisites
+
+* [Kubernetes](https://kubernetes.io/)
+* [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
+
+You will need a Kubernetes cluster containing Argo CD to host the manifests contained within this repository. Refer to <https://github.com/kevinobee/k8s-dev-cluster> for Terraform scripts that automate this setup step.
 
 ## Getting Started
 
 Either use or fork the <https://github.com/kevinobee/k8s-gitops> Git repository and then create an Argo CD application to manage the cluster using GitOps principles.
+
+Run the following command to create an Argo CD _App of Apps_that will bootstrap the cluster:
 
 ```Shell
 kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
