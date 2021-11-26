@@ -23,11 +23,9 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
 ### Using Gitea
 
-1. Start the local development cluster and then run the `./gitea.sh` script to view the url where Gitea can be accessed locally.
+1. Start the local development cluster containing Argo CD
 
-    Running the `./gitea.sh` script will setup the `BASE_HOST` and `GITEA_HOST` environment variables used in the following steps.
-
-1. Login to Gitea and create an empty `k8s-gitops` repository
+1. Login to Gitea at <http://git.example.com> and create an empty `k8s-gitops` repository
 
 1. Push the repository code to Gitea in the cluster
 
