@@ -4,7 +4,7 @@ metadata:
   name: gitea
   namespace: argocd
 spec:
-  project: dev
+  project: default
   source:
     repoURL: 'https://dl.gitea.io/charts/'
     targetRevision: 4.1.1

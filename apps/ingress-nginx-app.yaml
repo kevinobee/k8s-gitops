@@ -4,7 +4,7 @@ metadata:
   name: nginx-ingress-controller
   namespace: argocd
 spec:
-  project: dev
+  project: default
   source:
     repoURL: 'https://kubernetes.github.io/ingress-nginx'
     targetRevision: 4.0.10
