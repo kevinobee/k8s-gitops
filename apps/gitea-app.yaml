@@ -17,12 +17,12 @@ spec:
           value: ChangeMe
         - name: ingress.enabled
           value: 'true'
+        - name: 'ingress.className'
+          value: 'nginx'
         - name: gitea.startupProbe.enabled
           value: 'true'
         - name: gitea.metrics.enabled
           value: 'true'
-        # - name: service.http.type
-        #   value: LoadBalancer
   destination:
     namespace: gitea
     server: 'https://kubernetes.default.svc'
