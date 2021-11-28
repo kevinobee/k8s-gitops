@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: heimdall
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://k8s-at-home.com/charts/'
+    targetRevision: 4.2.0
+    chart: heimdall
+    helm:
+      parameters:
+        # Ingress settings, ref: https://github.com/k8s-at-home/library-charts/tree/main/charts/stable/common
+        - name: ingress.main.enabled
+          value: 'true'
+        - name: ingress.main.hosts[0].host
+          value: 'apps.example.com'
+        # - name: ingress.main.hosts[0].paths[0].path
+        #   value: '/'
+        # - name: ingress.main.hosts[0].paths[0].pathType
+        #   value: 'Prefix'
+        - name: ingress.main.ingressClassName
+          value: 'nginx'
+
+        # - name: persistence.config.enabled
+        #   value: 'true'
+  destination:
+    namespace: heimdall
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: false
+      selfHeal: false

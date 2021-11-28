@@ -3,9 +3,13 @@ kind: Kustomization
 
 resources:
   - sealed-secrets-app.yaml
+
   # Issue: Metallb and NGINX ingress use different helm charts and
   # config maps to those in bootstrapped cluster
   # - ingress-nginx-app.yaml
   # - metallb-app.yaml
   # - metallb-load-balancer-config.yaml
+
   - gitea-app.yaml
+  - heimdall-app.yaml
+  - heimdall-ingress.yaml
