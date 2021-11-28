@@ -3,14 +3,16 @@ kind: Application
 metadata:
   name: apps
   namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
-  project: dev
+  project: default
   source:
     path: apps
     repoURL: 'http://git.example.com/gitea_admin/k8s-gitops.git'
     targetRevision: main
   destination:
-    namespace: gitops
+    namespace: argocd
     server: 'https://kubernetes.default.svc'
   syncPolicy:
     syncOptions:

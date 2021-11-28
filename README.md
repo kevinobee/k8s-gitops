@@ -21,23 +21,18 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
 *Note:* If you have forked the repository ensure that you update the source `repoUrl` setting in the yaml file before applying it.
 
-### Using Gitea
+## Cluster Applications
 
-1. Start the local development cluster containing Argo CD
+* [Argo CD](https://argoproj.github.io/cd/) declarative, GitOps continuous delivery tool for Kubernetes
 
-1. Login to Gitea at <http://git.example.com> and create an empty `k8s-gitops` repository
+     <http://argocd.example.com>
 
-1. Push the repository code to Gitea in the cluster
+* [Gitea](https://gitea.com/) self-hosted Git service
 
-    ```Shell
-    git remote add gitea http://git.example.com/gitea_admin/k8s-gitops.git
-    git push -u gitea main
-    ```
+    <http://git.example.com>
 
-1. Create the Argo CD application that will bootstrap the cluster
+    See the [examples documentation](./examples/README.md) for instructions on how to setup GitOps using the cluster hosted Gitea service
 
-    Ensure that the source `repoUrl` setting in the yaml file contains your `BASE_HOST` address and then run the following command:
+* [Heimdall](https://heimdall.site/) application dashboard and launcher
 
-    ```Shell
-    kubectl -n argocd apply -f ./examples/gitea-gitops-argocd-app.yaml
-    ```
+    <http://apps.example.com>
