@@ -1,11 +1,13 @@
 {
     "cSpell.words": [
+        "alertmanager",
         "argocd",
         "argoproj",
         "finalizer",
         "finalizers",
         "gitea",
         "gitops",
+        "Grafana",
         "jsonpath",
         "kube",
         "kubectl",
@@ -13,6 +15,7 @@
         "Kustomization",
         "metallb",
         "printf",
+        "Promtail",
         "rolebinding",
         "staticassets"
     ]

@@ -36,3 +36,7 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 * [Heimdall](https://heimdall.site/) application dashboard and launcher
 
     <http://apps.example.com>
+
+* [Loki](https://grafana.com/oss/loki/) stack (Loki, Promtail, Grafana, Prometheus)
+
+    <http://loki.example.com>
