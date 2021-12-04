@@ -10,6 +10,7 @@ resources:
   # - metallb-app.yaml
   # - metallb-load-balancer-config.yaml
 
+  - argo-cd-app.yaml
   - loki-app.yaml
   - loki-ingress.yaml
   - gitea-app.yaml
