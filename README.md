@@ -40,3 +40,9 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 * [Loki](https://grafana.com/oss/loki/) stack (Loki, Promtail, Grafana, Prometheus)
 
     <http://loki.example.com>
+
+## Best Practices
+
+1. Security
+
+    NSA framework analysis rules are run by [Kubescape](https://hub.armo.cloud/docs) as part of CI/CD on [GitHub](https://github.com/kevinobee/k8s-gitops/actions)
