@@ -17,5 +17,11 @@ jobs:
       - name: Install Kubescape
         run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
 
-      - name: Scan YAML files in apps folder
-        run: kubescape scan framework nsa,mitre,armobest apps/*.yaml
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
+      - name: Scan Argo CD Application files
+        run: kustomize build apps | kubescape scan framework nsa -
+
+      - name: Scan Argo CD YAML
+        run: kustomize build applications/argo-cd | kubescape scan framework nsa -
