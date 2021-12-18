@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-    path: applications/argo-cd
+    path: applications/argo-cd/overlays/dev
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

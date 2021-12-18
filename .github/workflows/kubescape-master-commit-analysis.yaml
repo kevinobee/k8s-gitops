@@ -25,4 +25,4 @@ jobs:
         run: kustomize build apps | kubescape scan framework nsa -
 
       - name: Scan Argo CD YAML
-        run: kustomize build applications/argo-cd | kubescape scan framework nsa -
+        run: kustomize build applications/argo-cd/overlays/dev | kubescape scan framework nsa -

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- namespace.yaml
+
+# Argo CD schemas
+- github.com/argoproj/argo-cd/manifests/crds
+- github.com/argoproj/argo-cd/manifests/base
+- github.com/argoproj/argo-cd/manifests/cluster-rbac/
+
+# Helm repositories
+- repo/helm/argo-helm-repo.yaml
+- repo/helm/ingress-nginx-helm-repo.yaml
+- repo/helm/metallb-helm-repo.yaml
+
+
+namespace: argocd
