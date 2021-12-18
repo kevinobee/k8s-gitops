@@ -43,6 +43,14 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
 ## Best Practices
 
+1. Code Policy Enforcement
+
+    [Datree](https://www.datree.io/) prevents Kubernetes misconfiguration issues From reaching production.
+
+    [Datree GitHub Action](https://github.com/kevinobee/k8s-gitops/actions/workflows/datree-master-commit-analysis.yml)
+
 1. Security
 
-    NSA framework analysis rules are run by [Kubescape](https://hub.armo.cloud/docs) as part of CI/CD on [GitHub](https://github.com/kevinobee/k8s-gitops/actions)
+    NSA framework analysis rules are run by [Kubescape](https://hub.armo.cloud/docs)
+
+    [Kubescape GitHub Action](https://github.com/kevinobee/k8s-gitops/actions/workflows/kubescape-master-commit-analysis.yaml)
