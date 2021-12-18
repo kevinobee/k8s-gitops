@@ -23,5 +23,8 @@ jobs:
       - name: Scan Argo CD Application files
         run: kustomize build apps | datree test - --ignore-missing-schemas
 
-      - name: Scan Argo CD YAML
+      - name: Scan Argo CD
         run: kustomize build applications/argo-cd | datree test - --ignore-missing-schemas
+
+      - name: Scan Examples
+        run: datree test examples/*.yaml --ignore-missing-schemas
