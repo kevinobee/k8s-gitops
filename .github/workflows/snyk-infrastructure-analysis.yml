@@ -15,6 +15,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: '36 23 * * 6'
+  workflow_dispatch:
 
 jobs:
   snyk:
