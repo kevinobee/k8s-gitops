@@ -10,7 +10,9 @@ resources:
   # - metallb-app.yaml
   # - metallb-load-balancer-config.yaml
 
-  - argo-cd-app.yaml
+  # Issue: Argo CD quick install not currently used to bootstrap cluster
+  # - argo-cd-app.yaml
+  
   - loki-app.yaml
   - loki-ingress.yaml
   - gitea-app.yaml
