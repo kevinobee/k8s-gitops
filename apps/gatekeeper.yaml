@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: gatekeeper
-  namespace: gatekeeper-system
+  namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
