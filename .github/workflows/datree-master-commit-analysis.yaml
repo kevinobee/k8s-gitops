@@ -1,4 +1,4 @@
-name: Datree
+name: Datree Misconfiguration Checks
 
 on:
   push:
@@ -21,11 +21,14 @@ jobs:
       - name: Install Kustomize
         run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
 
-      - name: Scan Argo CD Application files
-        run: kustomize build apps | datree test - --ignore-missing-schemas
+      - name: Argo CD Application file scan
+        run: kustomize build apps | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
 
-      - name: Scan Argo CD
-        run: kustomize build applications/argo-cd/overlays/dev | datree test - --ignore-missing-schemas
+      - name: Argo CD scan
+        run: kustomize build applications/argo-cd/overlays/dev | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
 
-      - name: Scan Examples
-        run: datree test examples/*.yaml --ignore-missing-schemas
+      - name: Gatekeeper scan
+        run: kustomize build applications/gatekeeper | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
+
+      - name: Examples scan
+        run: datree test examples/*.yaml --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas
