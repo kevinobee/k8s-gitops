@@ -24,8 +24,8 @@ jobs:
       - name: Argo CD Application file scan
         run: kustomize build apps | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
 
-      - name: Argo CD scan
-        run: kustomize build applications/argo-cd/overlays/dev | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
+      # - name: Argo CD scan
+      #   run: kustomize build applications/argo-cd/overlays/dev | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
 
       - name: Gatekeeper scan
         run: kustomize build applications/gatekeeper | datree test --schema-version 1.21.0 --only-k8s-files --ignore-missing-schemas -
