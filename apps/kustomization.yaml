@@ -13,6 +13,7 @@ resources:
   - argo-cd-app.yaml
   - loki-app.yaml
   - loki-ingress.yaml
+  - gatekeeper.yaml
   - gitea-app.yaml
   - heimdall-app.yaml
   - heimdall-ingress.yaml
