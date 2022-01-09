@@ -11,4 +11,6 @@ bases:
 
 resources:
   - gpm-ingress.yaml
-  
+
+patches:
+  - replicas.yaml
