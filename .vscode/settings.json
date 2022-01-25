@@ -4,6 +4,7 @@
         "argocd",
         "argoproj",
         "armobest",
+	      "configmap",
         "crds",
         "Datree",
         "finalizer",
@@ -14,6 +15,7 @@
         "jsonpath",
         "kube",
         "kubectl",
+	      "kubedashboard",
         "kubernetes",
         "Kubescape",
         "Kustomization",
@@ -21,6 +23,7 @@
         "printf",
         "Promtail",
         "rolebinding",
+	      "serviceaccount",
         "staticassets"
     ]
 }
