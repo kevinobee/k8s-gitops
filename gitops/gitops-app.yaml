@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/kevinobee/k8s-argocd-gitops.git'
+    repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
     path: gitops
   destination:
