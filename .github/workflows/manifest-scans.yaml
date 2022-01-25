@@ -30,7 +30,7 @@ jobs:
 
   datree-scan:
     needs:
-      - devopsbest-scan
+      - kubescape-devopsbest-scan
 
     runs-on: ubuntu-latest
 
