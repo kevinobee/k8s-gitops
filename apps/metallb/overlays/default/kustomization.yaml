@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../../base
+
+# patches:
+#   - ./patch-deployment.yaml
+
+  # - ./patch-memory-request.yaml
+  # - ./patch-cpu-request.yaml
+  # - ./patch-memory-limit.yaml
+  # - ./patch-cpu-limit.yaml
+  # - ./patch-liveness-probe.yaml
+  # - ./patch-readiness-probe.yaml
+

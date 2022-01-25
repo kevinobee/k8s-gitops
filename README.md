@@ -1,4 +1,4 @@
-# k8s-gitops
+# GitOps with Kubernetes using Argo CD & Kustomize
 
 Repository contains Kubernetes manifests to bootstrap a Kubernetes cluster maintained by [Argo CD](https://argoproj.github.io/cd/).
 
@@ -23,9 +23,37 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
 ## Cluster Applications
 
+* Kubernetes dashboard
+
+  <https://kubedashboard.example.com/>
+
+  Get the access token:
+
+  ```shell
+  export TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
+
+  export TOKEN=$(kubectl get $TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 -d && echo)
+
+  echo $TOKEN
+  ```
+
 * [Argo CD](https://argoproj.github.io/cd/) declarative, GitOps continuous delivery tool for Kubernetes
 
-     <http://argocd.example.com>
+  <https://argocd.example.com/>
+
+  Get the Admin users password:
+
+  ```shell
+  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+  ```
+
+* Gatekeeper UI
+
+  <https://gatekeeper.example.com/>
+
+* [Loki](https://grafana.com/oss/loki/) stack (Loki, Promtail, Grafana, Prometheus)
+
+    <http://loki.example.com>
 
 * [Gitea](https://gitea.com/) self-hosted Git service
 
@@ -33,13 +61,10 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
     See the [examples documentation](./examples/README.md) for instructions on how to setup GitOps using the cluster hosted Gitea service
 
+<!--
 * [Heimdall](https://heimdall.site/) application dashboard and launcher
 
-    <http://apps.example.com>
-
-* [Loki](https://grafana.com/oss/loki/) stack (Loki, Promtail, Grafana, Prometheus)
-
-    <http://loki.example.com>
+    <http://apps.example.com> -->
 
 ## Best Practices
 
@@ -54,3 +79,11 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
     NSA framework analysis rules are run by [Kubescape](https://hub.armo.cloud/docs)
 
     [Kubescape GitHub Action](https://github.com/kevinobee/k8s-gitops/actions/workflows/kubescape-master-commit-analysis.yaml)
+
+## References
+
+* [Deploying Kubernetes Dashboard with Argo/Kustomize](https://www.frakkingsweet.com/deploying-kubernetes-dashboard-with-argo-kustomize/) blog post
+
+* [Gatekeeper UI](https://github.com/krackjack29/gatekeeper-ui)
+
+  A simple web interface to view the constraints, violations and templates of Gatekeeper (Open policy agent) policies deployed in the cluster.

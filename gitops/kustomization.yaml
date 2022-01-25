@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - gitops-app.yaml
+  - argocd-app.yaml
+  - gatekeeper-app.yaml
+  - metallb-app.yaml
+  - ingress-nginx-app.yaml
+  - sealed-secrets-app.yaml
+  - loki-app.yaml
+  - loki-ingress.yaml
+  - gitea-app.yaml
+  # - heimdall-app.yaml
+  # - heimdall-ingress.yaml

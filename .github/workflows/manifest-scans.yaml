@@ -1,0 +1,49 @@
+name: Scan YAML manifests
+
+on:
+  push:
+    branches: [ master ]
+
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+
+  kubescape-devopsbest-scan:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Kubescape
+        run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
+
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
+      - name: Scan manifests
+        run: kustomize build . | kubescape scan framework devopsbest --enable-host-scan --exclude-namespaces kube-system,kube-public - # --fail-threshold 0
+
+  datree-scan:
+    needs:
+      - devopsbest-scan
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Datree
+        run: curl https://get.datree.io | /bin/bash
+
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
+      - name: Scan manifests
+        run: kustomize build . | datree test --schema-version 1.21.0 --ignore-missing-schemas -
+

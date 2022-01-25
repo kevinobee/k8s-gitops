@@ -1,21 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - sealed-secrets-app.yaml
-
-  # Issue: Metallb and NGINX ingress use different helm charts and
-  # config maps to those in bootstrapped cluster
-  # - ingress-nginx-app.yaml
-  # - metallb-app.yaml
-  # - metallb-load-balancer-config.yaml
-
-  # Issue: Argo CD quick install not currently used to bootstrap cluster
-  # - argo-cd-app.yaml
-  
-  - loki-app.yaml
-  - loki-ingress.yaml
-  - gatekeeper.yaml
-  - gitea-app.yaml
-  - heimdall-app.yaml
-  - heimdall-ingress.yaml
+bases:
+  - metallb/overlays/default
+  - ingress-nginx/overlays/default
+  - argocd/overlays/default
+  - gatekeeper/overlays/default
+  - k8s-dashboard
