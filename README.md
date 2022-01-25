@@ -61,24 +61,9 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
     See the [examples documentation](./examples/README.md) for instructions on how to setup GitOps using the cluster hosted Gitea service
 
-<!--
-* [Heimdall](https://heimdall.site/) application dashboard and launcher
+## Build Automation
 
-    <http://apps.example.com> -->
-
-## Best Practices
-
-1. Code Policy Enforcement
-
-    [Datree](https://www.datree.io/) prevents Kubernetes misconfiguration issues From reaching production.
-
-    [Datree GitHub Action](https://github.com/kevinobee/k8s-gitops/actions/workflows/datree-master-commit-analysis.yml)
-
-1. Security
-
-    NSA framework analysis rules are run by [Kubescape](https://hub.armo.cloud/docs)
-
-    [Kubescape GitHub Action](https://github.com/kevinobee/k8s-gitops/actions/workflows/kubescape-master-commit-analysis.yaml)
+Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/workflows/manifest-scans.yml) GitHub Action
 
 ## References
 
@@ -87,3 +72,7 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 * [Gatekeeper UI](https://github.com/krackjack29/gatekeeper-ui)
 
   A simple web interface to view the constraints, violations and templates of Gatekeeper (Open policy agent) policies deployed in the cluster.
+
+* [Kubescape](https://hub.armo.cloud/docs)
+
+* [Datree](https://www.datree.io/) prevents Kubernetes misconfiguration issues from reaching production.

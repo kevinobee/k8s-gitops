@@ -11,5 +11,3 @@ resources:
   - loki-app.yaml
   - loki-ingress.yaml
   - gitea-app.yaml
-  # - heimdall-app.yaml
-  # - heimdall-ingress.yaml
