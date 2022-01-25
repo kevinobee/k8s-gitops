@@ -3,7 +3,9 @@ kind: Kustomization
 
 bases:
   - ../../base
-  - github.com/krackjack29/gatekeeper-ui/deploy
+
+  # patched downstream for github.com/krackjack29/gatekeeper-ui/deploy
+  - github.com/kevinobee/gatekeeper-ui/deploy
 
 resources:
   - ingress.yaml
