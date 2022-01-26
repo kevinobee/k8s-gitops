@@ -26,15 +26,7 @@ jobs:
         run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
 
       - name: Scan manifests
-        run: kustomize build apps | kubescape scan framework devopsbest --enable-host-scan --exclude-namespaces kube-system,kube-public --format junit --output junit-kubescape-devopsbest -  # --fail-threshold 0
-
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: Kubescape DevOps Tests
-          path: junit-*.xml
-          reporter: jest-junit
+        run: kustomize build . | kubescape scan framework devopsbest --enable-host-scan --exclude-namespaces kube-system,kube-public - # --fail-threshold 0
 
   datree-scan:
     needs:
