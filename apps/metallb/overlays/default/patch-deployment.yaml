@@ -1,7 +1,0 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: controller
-  namespace: metallb-system
-spec:
-  replicas: 2
