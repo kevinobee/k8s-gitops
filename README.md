@@ -61,13 +61,21 @@ kustomize build apps | kubectl apply -f -
 
 * Monitoring UI
 
-    <http://loki.example.com>
+    <https://loki.example.com>
 
     Loki monitoring stack contains Promtail, Grafana and Prometheus
 
+    Get the admin users password:
+
+    ```shell
+    kubectl get secret --namespace monitoring loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+    ```
+
 * Gitea
 
-    <http://git.example.com>
+    <https://git.example.com>
+
+    Login as the `gitea` user with the password `gitea`
 
 ## Build Automation
 
