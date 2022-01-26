@@ -1,25 +1,33 @@
 # GitOps with Kubernetes using Argo CD & Kustomize
 
-Repository contains Kubernetes manifests to bootstrap a Kubernetes cluster maintained by [Argo CD](https://argoproj.github.io/cd/).
+Repository contains YAML manifests to bootstrap a Kubernetes cluster maintained by [Argo CD](https://argoproj.github.io/cd/).
 
 ## Pre-requisites
 
-* [Kubernetes](https://kubernetes.io/)
+* [Kubernetes cluster](https://kubernetes.io/)
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
 
-You will need a Kubernetes cluster containing Argo CD to host the manifests contained within this repository. Refer to <https://github.com/kevinobee/k8s-dev-cluster> for Terraform scripts that automate this setup step.
+The [Kind](https://kind.sigs.k8s.io/) tool offers a simple way of creating a local Kubernetes cluster with only a single dependency on Docker.
+
+Create a cluster using the following commands:
+
+```shell
+# download the kind cli and move to /usr/local/bin/
+curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/
+
+# create the kubernetes cluster
+kind create cluster
+```
 
 ## Getting Started
 
-Either use or fork the <https://github.com/kevinobee/k8s-gitops> Git repository and then create an Argo CD application to manage the cluster using GitOps principles.
-
-Run the following command to create an Argo CD _App of Apps_that will bootstrap the cluster:
+Bootstrap the cluster using the command:
 
 ```Shell
-kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
+kustomize build apps | kubectl apply -f -
 ```
-
-*Note:* If you have forked the repository ensure that you update the source `repoUrl` setting in the yaml file before applying it.
 
 ## Cluster Applications
 
@@ -27,39 +35,39 @@ kubectl -n argocd apply -f ./examples/github-gitops-argocd-app.yaml
 
   <https://kubedashboard.example.com/>
 
-  Get the access token:
+    Get the admin access token:
 
-  ```shell
-  export TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
+    ```shell
+    export TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
 
-  export TOKEN=$(kubectl get $TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 -d && echo)
+    export TOKEN=$(kubectl get $TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 -d && echo)
 
-  echo $TOKEN
-  ```
+    echo $TOKEN
+    ```
 
-* [Argo CD](https://argoproj.github.io/cd/) declarative, GitOps continuous delivery tool for Kubernetes
+* Argo CD
 
   <https://argocd.example.com/>
 
-  Get the Admin users password:
+    Get the admin users password:
 
-  ```shell
-  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-  ```
+    ```shell
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+    ```
 
 * Gatekeeper UI
 
   <https://gatekeeper.example.com/>
 
-* [Loki](https://grafana.com/oss/loki/) stack (Loki, Promtail, Grafana, Prometheus)
+* Monitoring UI
 
     <http://loki.example.com>
 
-* [Gitea](https://gitea.com/) self-hosted Git service
+    Loki monitoring stack contains Promtail, Grafana and Prometheus
+
+* Gitea
 
     <http://git.example.com>
-
-    See the [examples documentation](./examples/README.md) for instructions on how to setup GitOps using the cluster hosted Gitea service
 
 ## Build Automation
 
@@ -69,10 +77,20 @@ Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/wo
 
 * [Deploying Kubernetes Dashboard with Argo/Kustomize](https://www.frakkingsweet.com/deploying-kubernetes-dashboard-with-argo-kustomize/) blog post
 
-* [Gatekeeper UI](https://github.com/krackjack29/gatekeeper-ui)
+* [Argo CD](https://argoproj.github.io/cd/) declarative, GitOps continuous delivery tool for Kubernetes.
 
-  A simple web interface to view the constraints, violations and templates of Gatekeeper (Open policy agent) policies deployed in the cluster.
+* [Loki](https://grafana.com/oss/loki/) monitoring stack.
+
+### Security and Configuration
 
 * [Kubescape](https://hub.armo.cloud/docs)
 
-* [Datree](https://www.datree.io/) prevents Kubernetes misconfiguration issues from reaching production.
+* [Datree](https://www.datree.io/)
+
+* [Gatekeeper UI](https://github.com/krackjack29/gatekeeper-ui)
+
+  A simple web interface to view the constraints, violations and templates of Gatekeeper (Open Policy Agent) policies deployed in the cluster.
+
+### Developer Applications
+
+* [Gitea](https://gitea.com/)
