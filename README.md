@@ -28,7 +28,7 @@ kind create cluster --config kind-config.yaml
 Bootstrap the cluster using the command:
 
 ```Shell
-kustomize build apps | kubectl apply -f -
+kustomize build . | kubectl apply -f -
 ```
 
 ## Cluster Applications
