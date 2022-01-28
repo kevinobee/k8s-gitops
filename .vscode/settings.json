@@ -15,7 +15,6 @@
       "Grafana",
       "jsonpath",
       "kevinobee",
-      "krackjack29",
       "kube",
       "kubectl",
       "k8s",
@@ -27,6 +26,7 @@
       "Promtail",
       "rolebinding",
       "serviceaccount",
+      "sighupio",
       "staticassets"
     ]
 }

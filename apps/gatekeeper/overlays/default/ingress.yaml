@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: gatekeeper-ui-ingress
+  name: gatekeeper-policy-manager
   namespace: gatekeeper-system
   annotations:
     ingress.kubernetes.io/proxy-body-size: 100M
@@ -9,13 +9,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: gatekeeper.example.com
+  - host: gpm.example.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: gatekeeper-ui
+            name: gatekeeper-policy-manager
             port:
-              number: 8080
+              number: 80
