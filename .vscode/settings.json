@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
       "alertmanager",
+      "apiserver",
       "argocd",
       "argoproj",
       "armobest",
@@ -21,6 +22,7 @@
       "karancode",
       "kevinobee",
       "kube",
+      "kubeadm",
       "kubectl",
       "kubernetes",
       "Kubescape",

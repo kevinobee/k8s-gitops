@@ -20,7 +20,7 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/
 
 # create the kubernetes cluster
-kind create cluster
+kind create cluster --config kind-config.yaml
 ```
 
 ## Getting Started
