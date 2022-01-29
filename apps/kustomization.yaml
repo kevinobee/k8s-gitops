@@ -7,3 +7,4 @@ bases:
   - argocd/overlays/default
   - gatekeeper/overlays/default
   - k8s-dashboard
+  - spekt8/overlays/default

@@ -73,6 +73,10 @@ kustomize build apps | kubectl apply -f -
   kubectl get secret --namespace monitoring loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
   ```
 
+* SPEKT8 Cluster Visualization
+
+  <https://spekt8.example.com/>
+
 * Gitea
 
   <https://git.example.com>
@@ -101,6 +105,13 @@ Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/wo
 
   A simple web interface to view the constraints, violations and templates of Gatekeeper (Open Policy Agent) policies deployed in the cluster.
 
+### Dashboards and Visualizations
+
+* [SPEKT8](https://github.com/spekt8/spekt8)
+
+  SPEKT8 is a new visualization tool for your Kubernetes clusters. It automatically builds logical topologies of your application and infrastructure, which enable your SRE and Ops team to intuitively understand, monitor, and control your containerized, micro services based application.
+
 ### Developer Applications
 
 * [Gitea](https://gitea.com/)
+

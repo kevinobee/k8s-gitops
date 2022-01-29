@@ -14,11 +14,11 @@
       "gitops",
       "Grafana",
       "jsonpath",
+      "k8s",
       "kevinobee",
       "krackjack29",
       "kube",
       "kubectl",
-      "k8s",
       "kubernetes",
       "Kubescape",
       "Kustomization",
@@ -27,6 +27,7 @@
       "Promtail",
       "rolebinding",
       "serviceaccount",
+      "spekt8",
       "staticassets"
     ]
 }

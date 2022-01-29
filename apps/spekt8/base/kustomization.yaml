@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: spekt8
+
+resources:
+  - namespace.yaml
+  
+  - https://raw.githubusercontent.com/spekt8/spekt8/master/spekt8-deployment.yaml
+  - https://raw.githubusercontent.com/spekt8/spekt8/master/fabric8-rbac.yaml
