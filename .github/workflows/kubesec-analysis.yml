@@ -31,12 +31,12 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Kustomize build YAML
-        run: kubectl kustomize . > /tmp/kustomize.yaml
+        run: kubectl kustomize . > kustomize.yaml
 
       - name: Run kubesec scanner
         uses: controlplaneio/kubesec-action@43d0ddff5ffee89a6bb9f29b64cd865411137b14
         with:
-          input: /tmp/kustomize.yaml # specify configuration file to scan here
+          input: kustomize.yaml # specify configuration file to scan here
           format: template
           template: template/sarif.tpl
           output: kubesec-results.sarif
