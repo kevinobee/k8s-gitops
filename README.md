@@ -35,7 +35,7 @@ kustomize build apps | kubectl apply -f -
 
 * Kubernetes dashboard
 
-  <https://kubedashboard.example.com/>
+  <https://k8s.example.com/>
 
   Get the admin access token:
 
@@ -57,9 +57,9 @@ kustomize build apps | kubectl apply -f -
   kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
   ```
 
-* Gatekeeper UI
+* Gatekeeper Policy Manager (GPM)
 
-  <https://gatekeeper.example.com/>
+  <https://gpm.example.com/>
 
 * Monitoring UI
 
@@ -97,9 +97,13 @@ Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/wo
 
 * [Datree](https://www.datree.io/)
 
-* [Gatekeeper UI](https://github.com/krackjack29/gatekeeper-ui)
+* [OPA Gatekeeper Library](https://github.com/open-policy-agent/gatekeeper-library)
 
-  A simple web interface to view the constraints, violations and templates of Gatekeeper (Open Policy Agent) policies deployed in the cluster.
+  A community-owned library of policies for the OPA Gatekeeper project.
+
+* [Gatekeeper Policy Manager (GPM)](https://github.com/sighupio/gatekeeper-policy-manager)
+
+  Gatekeeper Policy Manager is a simple read-only web UI for viewing OPA Gatekeeper policies' status in a Kubernetes Cluster.
 
 ### Developer Applications
 

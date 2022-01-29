@@ -15,18 +15,19 @@
       "Grafana",
       "jsonpath",
       "kevinobee",
-      "krackjack29",
       "kube",
       "kubectl",
-      "kubedashboard",
+      "k8s",
       "kubernetes",
       "Kubescape",
       "Kustomization",
       "metallb",
+      "openpolicyagent",
       "printf",
       "Promtail",
       "rolebinding",
       "serviceaccount",
+      "sighupio",
       "staticassets"
     ]
 }
