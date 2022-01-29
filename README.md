@@ -35,7 +35,7 @@ kustomize build apps | kubectl apply -f -
 
 * Kubernetes dashboard
 
-  <https://kubedashboard.example.com/>
+  <https://k8s.example.com/>
 
   Get the admin access token:
 
