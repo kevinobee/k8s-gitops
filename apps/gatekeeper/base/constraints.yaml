@@ -1,0 +1,26 @@
+# apiVersion: constraints.gatekeeper.sh/v1beta1
+# kind: K8sAllowedRepos
+# metadata:
+#   name: repo-is-openpolicyagent
+# spec:
+#   match:
+#     kinds:
+#       - apiGroups: [""]
+#         kinds: ["Pod"]
+#     namespaces:
+#       - "gatekeeper-system"
+#   parameters:
+#     repos:
+#       - "openpolicyagent/"
+
+# ---
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sBlockNodePort
+metadata:
+  name: block-node-port
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Service"]
