@@ -97,6 +97,10 @@ Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/wo
 
 * [Datree](https://www.datree.io/)
 
+* [OPA Gatekeeper Library](https://github.com/open-policy-agent/gatekeeper-library)
+
+  A community-owned library of policies for the OPA Gatekeeper project.
+
 * [Gatekeeper Policy Manager (GPM)](https://github.com/sighupio/gatekeeper-policy-manager)
 
   Gatekeeper Policy Manager is a simple read-only web UI for viewing OPA Gatekeeper policies' status in a Kubernetes Cluster.
