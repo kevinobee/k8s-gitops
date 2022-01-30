@@ -6,35 +6,55 @@
 name: Kubesec
 
 on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - '.github/**'
+  # push:
+  #   branches: [ main ]
+  #   paths-ignore:
+  #     - '.github/**'
 
-  pull_request:
-    branches: [ main ]
-    paths-ignore:
-      - '.github/**'
+  # pull_request:
+  #   branches: [ main ]
+  #   paths-ignore:
+  #     - '.github/**'
 
-  schedule:
-    - cron: '43 3 * * 1'
+  # schedule:
+  #   - cron: '43 3 * * 1'
 
   workflow_dispatch:
 
 jobs:
-  lint:
-    name: Kubesec
-    runs-on: ubuntu-20.04
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
+
+  kustomize:
+    name: Kustomize
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Kustomize build YAML
-        run: kubectl kustomize . > kustomize.yaml
+        run: kustomize build > kustomize.yaml
+
+      - name: Upload kustomize build YAML
+        uses: actions/upload-artifact@v2
+        with:
+          name: kustomize
+          path: kustomize.yaml
+
+  lint:
+    name: Kubesec
+    needs: kustomize
+    runs-on: ubuntu-20.04
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+
+      - name: Download kustomize build YAML
+        uses: actions/download-artifact@v2
+        with:
+          name: kustomize
 
       - name: Run kubesec scanner
         uses: controlplaneio/kubesec-action@43d0ddff5ffee89a6bb9f29b64cd865411137b14

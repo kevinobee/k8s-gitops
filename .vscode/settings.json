@@ -4,7 +4,9 @@
       "argocd",
       "argoproj",
       "armobest",
+      "codeql",
       "configmap",
+      "controlplaneio",
       "crds",
       "Datree",
       "devopsbest",
@@ -27,6 +29,7 @@
       "printf",
       "Promtail",
       "rolebinding",
+      "sarif",
       "serviceaccount",
       "sighupio",
       "staticassets"
