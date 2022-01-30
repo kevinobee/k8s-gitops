@@ -8,16 +8,19 @@ name: Kubesec
 on:
   push:
     branches: [ main ]
-    
+    paths-ignore:
+      - '.github/**'
+
   pull_request:
-    # The branches below must be a subset of the branches above
     branches: [ main ]
-  
+    paths-ignore:
+      - '.github/**'
+
   schedule:
     - cron: '43 3 * * 1'
 
   workflow_dispatch:
-  
+
 jobs:
   lint:
     name: Kubesec
