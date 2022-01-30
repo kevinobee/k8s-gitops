@@ -1,0 +1,89 @@
+name: Static Analysis
+
+on:
+  # push:
+  #   branches: [ main ]
+  #   paths-ignore:
+  #     - '.github/**'
+
+  # pull_request:
+  #   branches: [ main ]
+  #   paths-ignore:
+  #     - '.github/**'
+
+  # schedule:
+  #   - cron: '43 3 * * 1'
+
+  workflow_dispatch:
+
+jobs:
+
+  kustomize:
+    name: Kustomize
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Kustomize build YAML
+        run: kustomize build > kustomize.yaml
+
+      - name: Upload kustomize build YAML
+        uses: actions/upload-artifact@v2
+        with:
+          name: kustomize
+          path: kustomize.yaml
+
+  snyk:
+    name: Snyk Infrastructure as Code
+    needs: kustomize
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download kustomize build YAML
+        uses: actions/download-artifact@v2
+        with:
+          name: kustomize
+
+      - name: Run Snyk to check configuration files for security issues
+        continue-on-error: true
+        uses: snyk/actions/iac@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          file: kustomize.yaml
+
+      - name: Upload result to GitHub Code Scanning
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: snyk.sarif
+
+  # lint:
+  #   name: Kubesec
+  #   needs: kustomize
+  #   runs-on: ubuntu-20.04
+  #   permissions:
+  #     actions: read
+  #     contents: read
+  #     security-events: write
+
+  #   steps:
+
+  #     - name: Download kustomize build YAML
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: kustomize
+
+  #     - name: Run kubesec scanner
+  #       uses: controlplaneio/kubesec-action@43d0ddff5ffee89a6bb9f29b64cd865411137b14
+  #       with:
+  #         input: kustomize.yaml # specify configuration file to scan here
+  #         format: template
+  #         template: template/sarif.tpl
+  #         output: kubesec-results.sarif
+  #         exit-code: "0"
+
+  #     - name: Upload Kubesec scan results to GitHub Security tab
+  #       uses: github/codeql-action/upload-sarif@v1
+  #       with:
+  #         sarif_file: kubesec-results.sarif

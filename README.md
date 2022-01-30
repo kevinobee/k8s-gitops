@@ -105,6 +105,8 @@ Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/wo
 
   Gatekeeper Policy Manager is a simple read-only web UI for viewing OPA Gatekeeper policies' status in a Kubernetes Cluster.
 
+* [Snyk Infrastructure as Code Action](https://github.com/snyk/actions/tree/master/iac)
+
 ### Developer Applications
 
 * [Gitea](https://gitea.com/)

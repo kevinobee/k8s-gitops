@@ -22,7 +22,6 @@
       "kubectl",
       "kubernetes",
       "Kubescape",
-      "Kubesec",
       "Kustomization",
       "metallb",
       "openpolicyagent",
@@ -32,6 +31,7 @@
       "sarif",
       "serviceaccount",
       "sighupio",
+      "Snyk",
       "staticassets"
     ]
 }
