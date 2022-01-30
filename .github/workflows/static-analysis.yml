@@ -19,17 +19,23 @@ on:
 jobs:
 
   kustomize:
-    name: Kustomize
+    name: Kustomize Build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Kustomize build YAML
-        run: kustomize build > kustomize.yaml
+      - name: Kustomize Build
+        uses: karancode/kustomize-github-action@master
+        with:
+          kustomize_version: '3.0.0'
+          kustomize_build_dir: '.'
+          kustomize_output_file: "kustomize.yaml"
+          kustomize_build_options: "--load_restrictor none"
+          enable_alpha_plugins: true
 
-      - name: Upload kustomize build YAML
+      - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
         with:
           name: kustomize
