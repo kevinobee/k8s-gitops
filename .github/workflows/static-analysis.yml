@@ -26,14 +26,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
       - name: Kustomize Build
-        uses: karancode/kustomize-github-action@master
-        with:
-          kustomize_version: '3.0.0'
-          kustomize_build_dir: '.'
-          kustomize_output_file: "kustomize.yaml"
-          kustomize_build_options: "--load_restrictor none"
-          enable_alpha_plugins: true
+        run: kustomize build > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
