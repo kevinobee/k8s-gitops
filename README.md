@@ -81,7 +81,7 @@ kustomize build apps | kubectl apply -f -
 
 ## Build Automation
 
-Refer to the [manifest-scans](https://github.com/kevinobee/k8s-gitops/actions/workflows/manifest-scans.yml) GitHub Action
+Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/workflows/static-analysis.yml) action and [Code scanning alerts](https://github.com/kevinobee/k8s-gitops/security/code-scanning) on GitHub for security and configuration scan results.
 
 ## References
 
