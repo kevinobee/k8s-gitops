@@ -1,15 +1,15 @@
 name: Static Analysis
 
 on:
-  # push:
-  #   branches: [ main ]
-  #   paths-ignore:
-  #     - '.github/**'
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '.github/**'
 
-  # pull_request:
-  #   branches: [ main ]
-  #   paths-ignore:
-  #     - '.github/**'
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - '.github/**'
 
   # schedule:
   #   - cron: '43 3 * * 1'
