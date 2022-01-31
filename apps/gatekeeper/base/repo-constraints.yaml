@@ -1,0 +1,84 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: metallb-namespace-allowed-repo
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "metallb-system"
+  parameters:
+    repos:
+      - "quay.io/metallb/"
+
+# ---
+
+# apiVersion: constraints.gatekeeper.sh/v1beta1
+# kind: K8sAllowedRepos
+# metadata:
+#   name: argocd-namespace-allowed-repo
+# spec:
+#   match:
+#     kinds:
+#       - apiGroups: [""]
+#         kinds: ["Pod"]
+#     namespaces:
+#       - "argocd"
+#   parameters:
+#     repos:
+#       - "quay.io/argoproj/argocd"
+#       - "ghcr.io/dexidp/"
+
+---
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: gatekeeper-system-namespace-allowed-repo
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "gatekeeper-system"
+  parameters:
+    repos:
+      - "quay.io/sighup/gatekeeper-policy-manager"
+      - "openpolicyagent/gatekeeper"
+
+---
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: ingress-nginx-namespace-allowed-repo
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "ingress-nginx"
+  parameters:
+    repos:
+      - "k8s.gcr.io/ingress-nginx/"
+
+---
+
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sAllowedRepos
+metadata:
+  name: kubernetes-dashboard-namespace-allowed-repo
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - "kubernetes-dashboard"
+  parameters:
+    repos:
+      - "kubernetesui/"
