@@ -6,4 +6,5 @@ bases:
   - ingress-nginx/overlays/default
   - argocd/overlays/default
   - gatekeeper/overlays/default
+  - sealed-secrets/overlays/default
   - k8s-dashboard
