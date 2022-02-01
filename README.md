@@ -20,7 +20,13 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/
 
 # create the kubernetes cluster
-kind create cluster
+kind create cluster --config kind-config.yaml
+```
+
+To remove the kubernetes cluster run the following command:
+
+```shell
+kind delete cluster
 ```
 
 ## Getting Started
@@ -28,7 +34,7 @@ kind create cluster
 Bootstrap the cluster using the command:
 
 ```Shell
-kustomize build apps | kubectl apply -f -
+kustomize build | kubectl apply -f -
 ```
 
 ## Cluster Applications
