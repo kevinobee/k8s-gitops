@@ -1,7 +1,13 @@
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
+runtimeConfig:
+  "api/alpha": "false"
+  "api/beta": "true"
+
 nodes:
+
 - role: control-plane
+
   kubeadmConfigPatches:
   - |
     kind: ClusterConfiguration
@@ -22,8 +28,10 @@ nodes:
             mountPath: "/var/log/kubernetes"
             readOnly: false
             pathType: DirectoryOrCreate
+
   # mount the local file on the control plane
   extraMounts:
   - hostPath: ./audit-policy.yaml
     containerPath: /etc/kubernetes/policies/audit-policy.yaml
     readOnly: true
+    selinuxRelabel: false

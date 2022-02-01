@@ -24,6 +24,7 @@
       "kube",
       "kubeadm",
       "kubectl",
+      "Kubelet",
       "kubernetes",
       "Kubescape",
       "Kustomization",
