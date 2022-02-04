@@ -97,13 +97,13 @@ jobs:
       - name: Run Datree to check for Kubernetes misconfiguration issues
         run: datree test --schema-version 1.21.0 --ignore-missing-schemas kustomize.yaml || exit 0
 
-  kubescore:
-    name: Kubescore
+  kube-score:
+    name: kube-score
     needs: kustomize
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup Kubescore
+      - name: Setup kube-score
         uses: tobbbles/setup-kubescore@v1.0.2
         with:
           version: latest
@@ -113,5 +113,5 @@ jobs:
         with:
           name: kustomize
 
-      - name: Run Kubescore static code analysis of the Kubernetes object definitions
+      - name: Run kube-score static code analysis of the Kubernetes object definitions
         run: kube-score score kustomize.yaml
