@@ -46,7 +46,7 @@ jobs:
     needs: kustomize
     runs-on: ubuntu-latest
     steps:
-      - name: Download kustomize build YAML
+      - name: Download Kustomize YAML
         uses: actions/download-artifact@v2
         with:
           name: kustomize
@@ -72,7 +72,7 @@ jobs:
       - name: Install Kubescape
         run: curl -s https://raw.githubusercontent.com/armosec/kubescape/master/install.sh | /bin/bash
 
-      - name: Download kustomize build YAML
+      - name: Download Kustomize YAML
         uses: actions/download-artifact@v2
         with:
           name: kustomize
@@ -89,7 +89,7 @@ jobs:
       - name: Install Datree
         run: curl https://get.datree.io | /bin/bash
 
-      - name: Download kustomize build YAML
+      - name: Download Kustomize YAML
         uses: actions/download-artifact@v2
         with:
           name: kustomize
@@ -108,7 +108,7 @@ jobs:
         with:
           version: latest
 
-      - name: Download kustomize build YAML
+      - name: Download Kustomize YAML
         uses: actions/download-artifact@v2
         with:
           name: kustomize
