@@ -1,0 +1,39 @@
+name: K8S Policy Check
+
+on:
+  push:
+    paths:
+      - '**.yaml'
+
+  workflow_dispatch:
+
+env:
+  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
+
+jobs:
+
+  datree-policy-check:
+    name: Datree Policy Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
+      - name: Install Datree
+        run: curl https://get.datree.io | /bin/bash
+
+      - name: Kustomize Build
+        run: kustomize build > kustomize.yaml
+
+      - name: Upload Kustomize YAML
+        uses: actions/upload-artifact@v2
+        with:
+          name: kustomize
+          path: kustomize.yaml
+
+      - name: Run Datree to check for Kubernetes misconfiguration issues
+        run: datree test --schema-version 1.21.0 --ignore-missing-schemas --policy Dev kustomize.yaml
