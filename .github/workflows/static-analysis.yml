@@ -101,11 +101,8 @@ jobs:
 
     steps:
       - name: Setup Kubescore
-        # You may pin to the exact commit or the version.
-        # uses: tobbbles/setup-kubescore@ea47df416875e58a85c247782d10f17fe098fbd6
         uses: tobbbles/setup-kubescore@v1.0.2
         with:
-          # kube-score version
           version: latest
 
       - name: Download kustomize build YAML

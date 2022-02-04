@@ -93,9 +93,13 @@ Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/w
 
 ### Security and Configuration
 
+* [Datree](https://www.datree.io/)
+
 * [Kubescape](https://hub.armo.cloud/docs)
 
-* [Datree](https://www.datree.io/)
+* [kube-score](https://github.com/zegl/kube-score)
+
+  `kube-score` is a tool that performs static code analysis of your Kubernetes object definitions.
 
 * [OPA Gatekeeper Library](https://github.com/open-policy-agent/gatekeeper-library)
 
