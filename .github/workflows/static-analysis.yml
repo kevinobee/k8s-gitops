@@ -16,6 +16,9 @@ on:
 
   workflow_dispatch:
 
+env:
+  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
+
 jobs:
 
   kustomize:
