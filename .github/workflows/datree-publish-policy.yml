@@ -1,0 +1,28 @@
+name: Datree Publish Policy
+
+on:
+
+  push:
+    paths:
+      - 'tools/datree/**'
+
+  workflow_dispatch:
+
+env:
+  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
+
+jobs:
+
+  publish-policy:
+    name: Publish Policy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Datree CLI
+        run: curl https://get.datree.io | /bin/bash
+
+      - name: Publish Policies
+        run: datree publish tools/datree/datree-policies.yaml
