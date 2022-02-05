@@ -33,7 +33,7 @@ jobs:
         run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
 
       - name: Kustomize Build
-        run: kustomize build > kustomize.yaml
+        run: kustomize build kustomize/overlays/developer > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
