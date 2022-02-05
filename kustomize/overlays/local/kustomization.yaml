@@ -4,5 +4,5 @@ kind: Kustomization
 bases:
   - ../alpine
 
-  - ../../base/k8s-dashboard
-  - ../../base/metallb
+  - ../../../apps/k8s-dashboard
+  - ../../../apps/metallb
