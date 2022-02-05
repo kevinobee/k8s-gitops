@@ -5,6 +5,4 @@ bases:
   - ../alpine
 
   - ../../base/k8s-dashboard
-
-  # TODO
-  # - ../../base/metallb
+  - ../../base/metallb
