@@ -11,5 +11,4 @@ resources:
   - github.com/sighupio/gatekeeper-policy-manager
 
   - constraints.yaml
-
-  - ingress.yaml # ... TODO move out of alpine deployment ?
+  - ingress.yaml
