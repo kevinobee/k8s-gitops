@@ -4,6 +4,7 @@ kind: Kustomization
 bases:
   - ../alpine
 
+  - ../../base/k8s-dashboard
+
   # TODO
-  # - ../../base/k8s-dashboard
-  # - ../../base/metallb/overlays/default
+  # - ../../base/metallb
