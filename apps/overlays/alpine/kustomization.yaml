@@ -5,6 +5,4 @@ bases:
   - ../../base/ingress-nginx
   - ../../base/gatekeeper
   - ../../base/sealed-secrets
-
-  # TODO
-  # - ../../base/argocd/overlays/default
+  - ../../base/argocd
