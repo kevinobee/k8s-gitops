@@ -32,7 +32,7 @@ jobs:
           kustomize_version: '3.0.0'
           kustomize_build_dir: "./kustomize/overlays/${{ matrix.run }}"
           kustomize_output_file: "kustomize-${{ matrix.run }}.yaml"
-          kustomize_build_options: "--load_restrictor LoadRestrictionsNone"
+          kustomize_build_options: "--load_restrictor none"
           enable_alpha_plugins: true
 
       - name: Upload Kustomize YAML
