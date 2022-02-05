@@ -6,3 +6,4 @@ bases:
   - ../../apps/gatekeeper
   - ../../apps/sealed-secrets
   - ../../apps/argocd
+  - ../../apps/loki
