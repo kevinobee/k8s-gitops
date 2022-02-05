@@ -2,8 +2,9 @@ name: K8S Policy Check
 
 on:
   push:
-    paths:
-      - '**.yaml'
+    paths-ignore:
+      - '.github/**'
+      - '**.md'
 
   workflow_dispatch:
 
@@ -14,7 +15,13 @@ jobs:
 
   datree-policy-check:
     name: Datree Policy Check
+
     runs-on: ubuntu-latest
+
+    strategy:
+      # max-parallel: 3
+      matrix:
+        run: ['alpine', 'local', 'developer']
 
     steps:
       - name: Checkout code
@@ -27,13 +34,13 @@ jobs:
         run: curl https://get.datree.io | /bin/bash
 
       - name: Kustomize Build
-        run: kustomize build > kustomize.yaml
+        run: kustomize build kustomize/overlays/${{ matrix.run }} > kustomize-${{ matrix.run }}.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
         with:
-          name: kustomize
-          path: kustomize.yaml
+          name: kustomize-${{ matrix.run }}
+          path: kustomize-${{ matrix.run }}.yaml
 
       - name: Run Datree to check for Kubernetes misconfiguration issues
-        run: datree test --schema-version 1.21.0 --ignore-missing-schemas --policy Dev kustomize.yaml
+        run: datree test --schema-version 1.21.0 --ignore-missing-schemas --policy Dev kustomize-${{ matrix.run }}.yaml
