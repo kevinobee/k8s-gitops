@@ -28,7 +28,7 @@ kind create cluster
 Bootstrap the cluster using the command:
 
 ```Shell
-kustomize build kustomize/overlays/alpine | kubectl apply -f -
+kustomize build deploy/overlays/alpine | kubectl apply -f -
 ```
 
 ## Cluster Applications
