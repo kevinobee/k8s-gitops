@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      # max-parallel: 3
       matrix:
         run: ['alpine', 'local', 'developer']
 
@@ -26,23 +27,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Kustomize
+        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
+
+      - name: Install Datree
+        run: curl https://get.datree.io | /bin/bash
+
       - name: Kustomize Build
-        uses: karancode/kustomize-github-action@master
-        with:
-          kustomize_version: '3.0.0'
-          kustomize_build_dir: "./kustomize/overlays/${{ matrix.run }}"
-          kustomize_output_file: "kustomize-${{ matrix.run }}.yaml"
-          kustomize_build_options: "--load_restrictor none"
-          enable_alpha_plugins: true
+        run: kustomize build kustomize/overlays/${{ matrix.run }} > kustomize-${{ matrix.run }}.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
         with:
           name: kustomize-${{ matrix.run }}
           path: kustomize-${{ matrix.run }}.yaml
-
-      - name: Install Datree
-        run: curl https://get.datree.io | /bin/bash
 
       - name: Run Datree to check for Kubernetes misconfiguration issues
         run: datree test --schema-version 1.21.0 --ignore-missing-schemas --policy Dev kustomize-${{ matrix.run }}.yaml
