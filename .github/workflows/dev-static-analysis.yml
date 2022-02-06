@@ -21,7 +21,7 @@ jobs:
     strategy:
       # max-parallel: 3
       matrix:
-        run: ['alpine', 'local', 'developer']
+        run: ['slim', 'local', 'developer']
 
     steps:
       - name: Checkout code

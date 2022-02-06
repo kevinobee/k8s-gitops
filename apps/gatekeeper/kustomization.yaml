@@ -7,7 +7,7 @@ resources:
   # OPA Gatekeeper Library
   - github.com/open-policy-agent/gatekeeper-library/library
 
-  # Gatekeeper Policy Manager (GPM) ... TODO move out of alpine deployment ?
+  # Gatekeeper Policy Manager (GPM) ... TODO move out of slim deployment ?
   - github.com/sighupio/gatekeeper-policy-manager
 
   - constraints.yaml
