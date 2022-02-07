@@ -8,3 +8,4 @@ bases:
   - gatekeeper/overlays/default
   - sealed-secrets/overlays/default
   - k8s-dashboard
+  - loki

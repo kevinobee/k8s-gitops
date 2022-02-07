@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  k8s-app: loki
+
+namespace: monitoring
+
+resources:
+  - namespace.yaml
+  - ingress.yaml
