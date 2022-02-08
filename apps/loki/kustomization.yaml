@@ -9,3 +9,20 @@ namespace: monitoring
 resources:
   - namespace.yaml
   - ingress.yaml
+
+helmCharts:
+  - name: loki-stack
+    repo: https://grafana.github.io/helm-charts/
+    version: 2.5.0
+    releaseName: loki-stack
+    namespace: monitoring
+
+# TODO update Helm chart values
+# - name: grafana.enabled
+#   value: 'true'
+# - name: prometheus.enabled
+#   value: 'true'
+# - name: prometheus.alertmanager.persistentVolume.enabled
+#   value: 'false'
+# - name: prometheus.server.persistentVolume.enabled
+#   value: 'false'
