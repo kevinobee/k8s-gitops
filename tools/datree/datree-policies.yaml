@@ -83,8 +83,6 @@ policies:
         messageOnFailure: Incorrect value for key `apiVersion` - the version you are trying to use is not supported by the Kubernetes cluster version (>=1.16)
       - identifier: CONTAINERS_INCORRECT_HOSTIPC_VALUE_TRUE
         messageOnFailure: Incorrect value for key `hostIPC` - running on the host’s IPC namespace can be (maliciously) used to interact with other processes running outside the container
-      - identifier: CRONJOB_MISSING_STARTINGDEADLINESECOND_KEY
-        messageOnFailure: Missing property object `startingDeadlineSeconds` - set a time limit to the cron execution to allow killing it if exceeded
       - identifier: CRONJOB_MISSING_CONCURRENCYPOLICY_KEY
         messageOnFailure: Missing property object `concurrencyPolicy` - the behavior will be more deterministic if jobs won't run concurrently
       - identifier: CONTAINERS_INCORRECT_PRIVILEGED_VALUE_TRUE
