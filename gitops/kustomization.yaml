@@ -9,5 +9,4 @@ resources:
   - ingress-nginx-app.yaml
   - sealed-secrets-app.yaml
   - loki-app.yaml
-  - loki-ingress.yaml
   - gitea-app.yaml
