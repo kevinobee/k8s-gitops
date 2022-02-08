@@ -7,7 +7,6 @@ commonLabels:
 resources:
   - install-control-plane.yaml
   - install-viz-extension.yaml
-  - install-buoyant-cloud-extension.yaml
 
 helmCharts:
   - name: linkerd-jaeger
