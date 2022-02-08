@@ -25,6 +25,7 @@
       "kubernetes",
       "Kubescape",
       "Kustomization",
+      "linkerd",
       "metallb",
       "openpolicyagent",
       "printf",

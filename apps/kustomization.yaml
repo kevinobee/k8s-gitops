@@ -7,5 +7,6 @@ bases:
   - argocd/overlays/default
   - gatekeeper/overlays/default
   - sealed-secrets/overlays/default
+  - linkerd
   - k8s-dashboard
   - loki
