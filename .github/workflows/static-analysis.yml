@@ -39,7 +39,7 @@ jobs:
           path: kustomize.yaml
 
   kubescape:
-    name: Kubescape DevOps Best
+    name: Kubescape
     needs: kustomize
     runs-on: ubuntu-latest
     steps:
@@ -51,7 +51,7 @@ jobs:
         with:
           name: kustomize
 
-      - name: Run Kubescape
+      - name: Run Kubescape scan for DevOps issues
         run: kubescape scan framework devopsbest --exclude-namespaces kube-system,kube-public kustomize.yaml # --enable-host-scan --fail-threshold 0
 
   datree:
