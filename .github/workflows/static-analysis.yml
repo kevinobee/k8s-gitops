@@ -13,6 +13,9 @@ on:
       - 'apps/**'
       - 'gitops/**'
 
+  # schedule:
+  #   - cron: '43 3 * * 1'
+
   workflow_dispatch:
 
 env:
