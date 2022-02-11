@@ -6,3 +6,24 @@ commonLabels:
 
 resources:
   - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+
+
+patches:
+  - path: patches/ingress-nginx-admission-patch.jsonpatch.yaml
+    target:
+      name: ingress-nginx-admission-patch
+      kind: Job
+      group: batch
+      version: v1
+  - path: patches/ingress-nginx-controller.jsonpatch.yaml
+    target:
+      name: ingress-nginx-controller
+      kind: Deployment
+      group: apps
+      version: v1
+  - path: patches/ingress-nginx-admission-create.jsonpatch.yaml
+    target:
+      name: ingress-nginx-admission-create
+      kind: Job
+      group: batch
+      version: v1
