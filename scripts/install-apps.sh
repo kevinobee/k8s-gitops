@@ -10,7 +10,7 @@ set -x;
 
 echo Build and apply YAML to the cluster ...
 while ! (kubectl kustomize apps | kubectl apply -f - --wait=true); do
-  sleep 0.1
+  sleep 1m
 done
 
 echo
