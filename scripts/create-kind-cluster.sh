@@ -8,6 +8,7 @@ set -o nounset;
 # debug commands
 set -x;
 
-kind create cluster --config kind-config.yaml
+kind create cluster --config kind-config.yaml --wait 1m
+kubectl wait node --all --for condition=ready
 kind get clusters
 kubectl get nodes -o wide
