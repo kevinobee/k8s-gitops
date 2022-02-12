@@ -6,7 +6,7 @@ set -o errexit;
 set -o pipefail;
 set -o nounset;
 # debug commands
-set -x;
+# set -x;
 
 kind create cluster --config kind-config.yaml --wait 1m
 kubectl wait node --all --for condition=ready

@@ -6,7 +6,7 @@ set -o errexit;
 set -o pipefail;
 set -o nounset;
 # debug commands
-set -x;
+# set -x;
 
 echo Build and apply YAML to the cluster ...
 while ! (kubectl apply -k apps --wait=true); do
