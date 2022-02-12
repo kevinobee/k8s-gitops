@@ -9,7 +9,7 @@ set -o nounset;
 set -x;
 
 echo Build and apply YAML to the cluster ...
-while ! (kubectl kustomize apps | kubectl apply -f - --wait=true); do
+while ! (kubectl apply -k apps --wait=true); do
   sleep 1m
 done
 
