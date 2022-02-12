@@ -1,7 +1,12 @@
 #!/bin/bash
 # test-apps.sh - checks cluster applications are accessible using ingress
 
-set -e
+# standard bash error handling
+set -o errexit;
+set -o pipefail;
+set -o nounset;
+# debug commands
+set -x;
 
 echo
 kubectl get ingress -A && echo

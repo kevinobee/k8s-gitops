@@ -1,16 +1,20 @@
 #!/bin/bash
 # install-cli-tools.sh - installs CLI tools for CI and automation scripts
 
-# ref: https://kubernetes.io/docs/tasks/tools/
-
-set -e
+# standard bash error handling
+set -o errexit;
+set -o pipefail;
+set -o nounset;
+# debug commands
+set -x;
 
 targetDir='/usr/local/bin/'
 
 # kubectl
+# ref: https://kubernetes.io/docs/tasks/tools/
 # curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 
-# kind
+# kind - ref: https://kind.sigs.k8s.io/docs/user/quick-start/
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
 chmod +x ./kind
 sudo mv ./kind ${targetDir}
