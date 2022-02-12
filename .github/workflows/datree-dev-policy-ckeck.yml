@@ -20,14 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Kustomize
-        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
-
       - name: Install Datree
         run: curl https://get.datree.io | /bin/bash
 
-      - name: Kustomize Build
-        run: kustomize build > kustomize.yaml
+      - name: Generate kustomize YAML
+        run: kubectl kustomize > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2

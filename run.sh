@@ -7,7 +7,7 @@ kind create cluster
 kubescape scan framework devopsbest --exclude-namespaces kube-system,kube-public --fail-threshold 0 --enable-host-scan
 
 
-kustomize build apps > apps.yaml
+kubectl kustomize apps > apps.yaml
 
 datree test apps.yaml --ignore-missing-schemas --schema-version 1.21.0
 
@@ -26,7 +26,7 @@ kubectl get secret dashboard-admin-sa-token-ggwfx -n kubernetes-dashboard -o jso
 kubescape scan framework devopsbest,nsa,mitre,armobest,devopsbest --exclude-namespaces kube-system,kube-public --fail-threshold 0 --enable-host-scan
 
 # view working differences
-kustomize build apps | kubectl diff -f -
+kubectl kustomize apps | kubectl diff -f -
 
 # clean-up
 kind delete cluster
