@@ -3,4 +3,6 @@
 
 set -e
 
-kind create cluster
+kind create cluster --config kind-config.yaml
+kind get clusters
+kubectl get nodes -o wide
