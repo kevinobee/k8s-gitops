@@ -10,5 +10,11 @@ set -x;
 
 kind create cluster --config kind-config.yaml --wait 1m
 kubectl wait node --all --for condition=ready
-kind get clusters
+kubectl cluster-info --context kind-kind
+# de-comment the next line to get detailed cluster info
+# kubectl cluster-info dump
+
+# sanity checks
 kubectl get nodes -o wide
+kubectl get pods --all-namespaces -o wide
+kubectl get services --all-namespaces -o wide
