@@ -39,7 +39,11 @@ if [ $? -ne 0 ]; then
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
 kubectl krew version
+kubectl krew list
 
+# kube-capacity - ref: https://github.com/robscott/kube-capacity
+kubectl krew install resource-capacity
+kubectl resource-capacity version
 
 # # Datree
 # curl https://get.datree.io | /bin/bash
