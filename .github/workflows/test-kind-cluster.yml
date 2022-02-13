@@ -15,18 +15,33 @@ jobs:
     - uses: actions/setup-go@v1
       with:
         go-version: 1.13
+
+    - name: Docker network checks
+      run: |
+        docker network inspect -f '{{.IPAM.Config}}' kind
+
+    - name: Install CLI tools
+      run: |
+        ./scripts/install-cli-tools.sh
+
     - name: Install latest version of Kind
       run: |
         GO111MODULE=on go get sigs.k8s.io/kind
+
     - name: Create Kind cluster
       run: |
         PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
+
     - name: Install Cluster applications
       run: |
         ./scripts/install-apps.sh
+
     - name: Run some sanity checks
       run: |
         kubectl get nodes -o wide
         kubectl get pods --all-namespaces -o wide
         kubectl get services --all-namespaces -o wide
 
+    - name: Get Resource usage information
+      run: |
+        kubectl resource-capacity --pods
