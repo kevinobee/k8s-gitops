@@ -14,7 +14,27 @@ kubectl cluster-info --context kind-kind
 # de-comment the next line to get detailed cluster info
 # kubectl cluster-info dump
 
+echo
+echo Cluster resources ...
+kubectl resource-capacity
+
+echo
+echo Container resources ...
+kubectl resource-capacity -c
+
+echo
+echo Pod resources ...
+kubectl resource-capacity -p
+
 # sanity checks
+echo
+echo Nodes ...
 kubectl get nodes -o wide
+
+echo
+echo Pods ...
 kubectl get pods --all-namespaces -o wide
+
+echo
+echo Services ...
 kubectl get services --all-namespaces -o wide
