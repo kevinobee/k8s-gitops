@@ -8,7 +8,7 @@ resources:
   - https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
 
   # OPA Gatekeeper Library
-  - github.com/open-policy-agent/gatekeeper-library/library
+  - github.com/open-policy-agent/gatekeeper-library/library/general
 
   - constraints.yaml
 

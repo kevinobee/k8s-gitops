@@ -3,7 +3,8 @@ name: K8S Policy Check
 on:
   push:
     paths:
-      - '**.yaml'
+      - 'apps/**'
+      - 'gitops/**'
 
   workflow_dispatch:
 
@@ -26,8 +27,8 @@ jobs:
       - name: Install Datree
         run: curl https://get.datree.io | /bin/bash
 
-      - name: Kustomize Build
-        run: kustomize build > kustomize.yaml
+      - name: Generate kustomize YAML
+        run: kubectl kustomize > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2

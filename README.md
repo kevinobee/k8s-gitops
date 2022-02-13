@@ -28,7 +28,7 @@ kind create cluster
 Bootstrap the cluster using the command:
 
 ```Shell
-kustomize build apps | kubectl apply -f -
+kubectl kustomize apps --enable-helm | kubectl apply -f -
 ```
 
 ## Cluster Applications

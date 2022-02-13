@@ -9,18 +9,15 @@ on:
 jobs:
 
   kustomize:
-    name: Kustomize Build
+    name: Kustomize YAML
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Kustomize
-        run: curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash
-
-      - name: Kustomize Build
-        run: kustomize build apps > kustomize.yaml
+      - name: Generate kustomize YAML
+        run: kubectl kustomize apps > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
