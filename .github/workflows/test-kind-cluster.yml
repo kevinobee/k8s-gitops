@@ -7,7 +7,7 @@ on:
 jobs:
 
   test-unit:
-    name: Create a Kind cluster
+    name: Test cluster applications
     runs-on: ubuntu-latest
 
     steps:
