@@ -29,6 +29,7 @@
       "Kubescape",
       "Kustomization",
       "metallb",
+      "nodeport",
       "openpolicyagent",
       "printf",
       "Promtail",

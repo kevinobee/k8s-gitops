@@ -10,7 +10,8 @@ set -o nounset;
 
 echo Build and apply YAML to the cluster ...
 while ! (kubectl kustomize apps --enable-helm | kubectl apply -f - --wait=true); do
-  sleep 1m
+  sleep 15s
+  kubectl rollout status -w deployment/gatekeeper-policy-manager -n gatekeeper-system
 done
 
 echo
