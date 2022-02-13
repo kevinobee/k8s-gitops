@@ -20,7 +20,7 @@ jobs:
         GO111MODULE=on go get sigs.k8s.io/kind
     - name: Create Kind cluster
       run: |
-        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml
+        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
     - name: Run some sanity checks
       # kubectl is already installed on the Github Ubuntu worker
       run: |
