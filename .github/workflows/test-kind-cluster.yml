@@ -1,0 +1,32 @@
+name: Test Cluster Applications
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+
+  test-unit:
+    name: Create a Kind cluster
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+    - name: Install latest version of Kind
+      run: |
+        GO111MODULE=on go get sigs.k8s.io/kind
+    - name: Create Kind cluster
+      run: |
+        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
+    - name: Install Cluster applications
+      run: |
+        ./scripts/install-apps.sh
+    - name: Run some sanity checks
+      run: |
+        kubectl get nodes -o wide
+        kubectl get pods --all-namespaces -o wide
+        kubectl get services --all-namespaces -o wide
+
