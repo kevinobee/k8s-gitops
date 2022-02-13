@@ -28,10 +28,6 @@ jobs:
       run: |
         docker network inspect -f '{{.IPAM.Config}}' kind
 
-    - name: Install CLI tools
-      run: |
-        ./scripts/install-cli-tools.sh
-
     - name: Install Cluster applications
       run: |
         ./scripts/install-apps.sh
@@ -42,6 +38,6 @@ jobs:
         kubectl get pods --all-namespaces -o wide
         kubectl get services --all-namespaces -o wide
 
-    - name: Get Resource usage information
+    - name: Test applications are accessible using ingress
       run: |
-        kubectl resource-capacity --pods
+        ./scripts/test-apps.sh
