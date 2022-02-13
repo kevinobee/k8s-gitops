@@ -16,14 +16,6 @@ jobs:
       with:
         go-version: 1.13
 
-    - name: Docker network checks
-      run: |
-        docker network inspect -f '{{.IPAM.Config}}' kind
-
-    - name: Install CLI tools
-      run: |
-        ./scripts/install-cli-tools.sh
-
     - name: Install latest version of Kind
       run: |
         GO111MODULE=on go get sigs.k8s.io/kind
@@ -31,6 +23,14 @@ jobs:
     - name: Create Kind cluster
       run: |
         PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
+
+    - name: Docker network checks
+      run: |
+        docker network inspect -f '{{.IPAM.Config}}' kind
+
+    - name: Install CLI tools
+      run: |
+        ./scripts/install-cli-tools.sh
 
     - name: Install Cluster applications
       run: |
