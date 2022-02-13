@@ -2,34 +2,19 @@
 
 Repository contains YAML manifests to bootstrap a Kubernetes cluster maintained by [Argo CD](https://argoproj.github.io/cd/).
 
-## Pre-requisites
-
-* [Kubernetes cluster](https://kubernetes.io/)
-* [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
-
-### Simple Cluster Setup
-
-The [Kind](https://kind.sigs.k8s.io/) tool offers a simple way of creating a local Kubernetes cluster with only a single dependency on Docker.
-
-Create a cluster using the following commands:
-
-```shell
-# download the kind cli and move to /usr/local/bin/
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind /usr/local/bin/
-
-# create the kubernetes cluster
-kind create cluster
-```
-
 ## Getting Started
 
-Bootstrap the cluster using the command:
+The `scripts` folder contains bash shell scripts to help you get started running the repository applications in a local Kubernetes cluster.
+
+Run the following scripts to install everything you will need:
 
 ```Shell
-kubectl kustomize apps --enable-helm | kubectl apply -f -
+./install-cli-tools.sh    # only required to be performed on first run
+./create-kind-cluster.sh
+./install-apps.sh
 ```
+
+Your cluster and applications are now running, time to start developing.
 
 ## Cluster Applications
 
