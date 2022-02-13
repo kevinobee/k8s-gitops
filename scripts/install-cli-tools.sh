@@ -11,28 +11,34 @@ set -o nounset;
 targetDir='/usr/local/bin/'
 
 # kind - ref: https://kind.sigs.k8s.io/docs/user/quick-start/
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
-chmod +x ./kind
-sudo mv ./kind ${targetDir}
+if [ ! $(which kind) ]; then
+  (
+    curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+    chmod +x ./kind
+    sudo mv ./kind ${targetDir}
+  )
+fi
+kind version
 
 # krew - ref: https://krew.sigs.k8s.io/docs/user-guide/setup/install/
 # macOS/Linux
 # Bash or ZSH shells
 # requires that git is installed
-(
-  set -x; cd "$(mktemp -d)" &&
-  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
-  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
-  KREW="krew-${OS}_${ARCH}" &&
-  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
-  tar zxvf "${KREW}.tar.gz" &&
-  ./"${KREW}" install krew
-)
-# add the $HOME/.krew/bin directory to your PATH environment variable
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-# ... TODO    and restart your shell.
-# check the installation
-kubectl krew
+kubectl krew > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+  (
+    set -x; cd "$(mktemp -d)" &&
+    OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+    ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+    KREW="krew-${OS}_${ARCH}" &&
+    curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+    tar zxvf "${KREW}.tar.gz" &&
+    ./"${KREW}" install krew
+  )
+  # add the $HOME/.krew/bin directory to your PATH environment variable
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+kubectl krew version
 
 
 # # Datree
