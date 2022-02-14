@@ -8,19 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://grafana.github.io/helm-charts'
-    targetRevision: 2.5.0
-    chart: loki-stack
-    helm:
-      parameters:
-        - name: grafana.enabled
-          value: 'true'
-        - name: prometheus.enabled
-          value: 'true'
-        - name: prometheus.alertmanager.persistentVolume.enabled
-          value: 'false'
-        - name: prometheus.server.persistentVolume.enabled
-          value: 'false'
+    repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
+    targetRevision: main
+    path: apps/loki
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring
