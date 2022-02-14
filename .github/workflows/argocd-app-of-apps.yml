@@ -30,17 +30,9 @@ jobs:
       run: |
         PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
 
-    - name: Docker network checks
+    - name: Install Argo CD in cluster
       run: |
-        docker network inspect -f '{{.IPAM.Config}}' kind
-
-    - name: Install Cluster applications
-      run: |
-        ./scripts/install-apps.sh
-
-    - name: Application Ingress checks
-      run: |
-        ./scripts/test-apps.sh
+        ./scripts/install-argocd.sh
 
     - name: Run Port Forward for Argo CD API server to localhost:8080
       run: |
