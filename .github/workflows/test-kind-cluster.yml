@@ -2,11 +2,21 @@ name: Test Cluster Applications
 
 on:
 
+  push:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+
   workflow_dispatch:
 
 jobs:
 
-  test-unit:
+  test-integration:
     name: Test cluster applications
     runs-on: ubuntu-latest
 
@@ -32,6 +42,12 @@ jobs:
       run: |
         ./scripts/install-apps.sh
 
-    - name: Test applications are accessible using ingress
+    - name: Audit logging checks
+      run: |
+        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
+        sleep 1s
+        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
+
+    - name: Application ingress checks
       run: |
         ./scripts/test-apps.sh
