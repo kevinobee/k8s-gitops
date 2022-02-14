@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate kustomize YAML
-        run: kubectl kustomize apps > kustomize.yaml
+        run: kubectl kustomize --enable-helm apps > kustomize.yaml
 
       - name: Upload Kustomize YAML
         uses: actions/upload-artifact@v2
