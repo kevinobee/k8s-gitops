@@ -2,6 +2,16 @@ name: Test Cluster Applications
 
 on:
 
+  push:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+
   workflow_dispatch:
 
 jobs:
