@@ -48,6 +48,6 @@ jobs:
         sleep 1s
         docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
 
-    - name: Test applications are accessible using ingress
+    - name: Application ingress checks
       run: |
         ./scripts/test-apps.sh
