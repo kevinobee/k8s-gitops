@@ -1,8 +1,24 @@
 loki:
   enabled: true
 
+  resources:
+    limits:
+      cpu: 400m
+      memory: 100Mi
+    requests:
+      cpu: 400m
+      memory: 100Mi
+
 promtail:
   enabled: true
+
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 100m
+      memory: 100Mi
 
 fluent-bit:
   enabled: false
@@ -15,16 +31,57 @@ grafana:
   image:
     tag: 8.1.6
 
+  resources:
+    limits:
+      cpu: 400m
+      memory: 100Mi
+    requests:
+      cpu: 400m
+      memory: 100Mi
+
 prometheus:
   enabled: true
+
+  resources:
+    limits:
+      cpu: 400m
+      memory: 100Mi
+    requests:
+      cpu: 400m
+      memory: 100Mi
 
   alertmanager:
     persistentVolume:
       enabled: false
 
+    resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+
+  pushgateway:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 100Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+
   server:
     persistentVolume:
       enabled: false
+
+    resources:
+      limits:
+        cpu: 400m
+        memory: 100Mi
+      requests:
+        cpu: 400m
+        memory: 100Mi
 
 filebeat:
   enabled: false
