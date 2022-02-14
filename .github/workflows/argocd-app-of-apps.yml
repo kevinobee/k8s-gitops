@@ -1,0 +1,62 @@
+name: Dynamic Analysis - Argo CD App of Apps
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+
+  run-test:
+    name: Argo CD App of Apps
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+    - uses: clowdhaus/argo-cd-action/@main
+      name: Download Argo CD CLI
+      with:
+        version: 2.2.5
+        command: version
+        options: --client
+
+    - name: Install latest version of Kind
+      run: |
+        GO111MODULE=on go get sigs.k8s.io/kind
+
+    - name: Create Kind cluster
+      run: |
+        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
+
+    - name: Docker network checks
+      run: |
+        docker network inspect -f '{{.IPAM.Config}}' kind
+
+    - name: Install Cluster applications
+      run: |
+        ./scripts/install-apps.sh
+
+    - name: Application Ingress checks
+      run: |
+        ./scripts/test-apps.sh
+
+    - name: Run Port Forward for Argo CD API server to localhost:8080
+      run: |
+        kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+
+    - name: Login to Argo CD using the CLI
+      run: |
+        pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
+        argocd login localhost:8080 --username admin --password ${pwd}
+
+    - name: Create Guestbook App from Git repository
+      run: |
+        argocd app create guestbook \
+          --repo https://github.com/argoproj/argocd-example-apps.git \
+          --path guestbook \
+          --dest-server https://kubernetes.default.svc \
+          --dest-namespace default`
+        argocd app get guestbook
+        argocd app sync guestbook
