@@ -14,16 +14,18 @@ apps=( \
   "k8s"
 )
 
+LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
+LB_URL="http://${LB_IP}"
+
 for i in "${apps[@]}"
 do
-  host="${i}.example.com"
-  url="https://${host}"
+  HOST="${i}.example.com"
 
-  echo "Check ingress for ${url} ... "
+  echo "Check ${HOST} ... "
 
-  STATUS=$(curl --insecure -s -o /dev/null -w '%{http_code}' ${url})
+  STATUS=$(curl -L -H "Host: ${HOST}" --insecure -s -o /dev/null -w '%{http_code}' ${LB_URL})
   if [ $STATUS -ne 444 ] && [ $STATUS -ne 200 ]; then
-    echo "*** Failed, access to ${url} (Status Code: $STATUS)"
+    echo "*** Failed, access to Host: ${HOST} at ${LB_URL} (Status Code: $STATUS)"
     exit 1
   fi
 done
