@@ -16,13 +16,4 @@ helmCharts:
     version: 2.5.0
     releaseName: loki-stack
     namespace: monitoring
-
-# TODO update Helm chart values
-# - name: grafana.enabled
-#   value: 'true'
-# - name: prometheus.enabled
-#   value: 'true'
-# - name: prometheus.alertmanager.persistentVolume.enabled
-#   value: 'false'
-# - name: prometheus.server.persistentVolume.enabled
-#   value: 'false'
+    valuesFile: values.yaml
