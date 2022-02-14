@@ -2,9 +2,8 @@ name: Datree Publish Policy
 
 on:
 
-  push:
-    paths:
-      - 'tools/datree/**'
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
 
   workflow_dispatch:
 
