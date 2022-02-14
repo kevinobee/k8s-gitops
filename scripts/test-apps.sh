@@ -15,7 +15,7 @@ apps=( \
 )
 
 LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
-LB_URL="http://${LB_IP}"
+LB_URL="https://${LB_IP}"
 
 for i in "${apps[@]}"
 do
