@@ -1,4 +1,4 @@
-name: Cluster Applications
+name: Dynamic Analysis
 
 on:
 
@@ -16,8 +16,8 @@ on:
 
 jobs:
 
-  test-integration:
-    name: Test cluster applications
+  test-applications:
+    name: Applications available
     runs-on: ubuntu-latest
 
     steps:
