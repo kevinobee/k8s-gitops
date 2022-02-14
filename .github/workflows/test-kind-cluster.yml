@@ -32,12 +32,6 @@ jobs:
       run: |
         ./scripts/install-apps.sh
 
-    - name: Run some sanity checks
-      run: |
-        kubectl get nodes -o wide
-        kubectl get pods --all-namespaces -o wide
-        kubectl get services --all-namespaces -o wide
-
     - name: Test applications are accessible using ingress
       run: |
         ./scripts/test-apps.sh
