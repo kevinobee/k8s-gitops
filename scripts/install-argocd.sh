@@ -10,4 +10,10 @@ set -o nounset;
 
 echo Install Argo CD ...
 kubectl kustomize apps/argocd/overlays/default | kubectl apply -f - --wait=true
+
+kubectl rollout status -w deployment/argocd-dex-server -n argocd
+kubectl rollout status -w deployment/argocd-redis -n argocd
+kubectl rollout status -w deployment/argocd-repo-server -n argocd
+kubectl rollout status -w deployment/argocd-server -n argocd
+
 kubectl get svc -n argocd -o wide
