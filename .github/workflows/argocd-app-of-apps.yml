@@ -49,7 +49,7 @@ jobs:
     - name: Login to Argo CD using the CLI
       run: |
         pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
-        argocd login localhost:8080 --username admin --password ${pwd}
+        argocd login localhost:8080 --insecure --username admin --password ${pwd}
 
     - name: Create Guestbook App from Git repository
       run: |
