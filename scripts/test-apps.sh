@@ -6,12 +6,13 @@ set -o errexit;
 set -o pipefail;
 set -o nounset;
 # debug commands
-# set -x;
+set -x;
 
 apps=( \
   "argocd" \
   "gpm" \
-  "k8s"
+  "k8s" \
+  "loki"
 )
 
 LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
