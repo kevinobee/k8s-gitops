@@ -52,3 +52,16 @@ jobs:
           --dest-namespace default
         argocd app get guestbook
         argocd app sync guestbook
+        argocd app wait guestbook
+
+    - name: Create Argo CD App of Apps from Git repository
+      run: |
+        argocd app create gitops \
+          --repo https://github.com/kevinobee/k8s-gitops.git \
+          --path gitops \
+          --dest-server https://kubernetes.default.svc \
+          --dest-namespace default
+        argocd app get gitops
+        argocd app sync gitops
+        argocd app wait gitops
+        argocd app list
