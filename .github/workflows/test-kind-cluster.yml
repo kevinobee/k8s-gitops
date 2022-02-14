@@ -32,6 +32,12 @@ jobs:
       run: |
         ./scripts/install-apps.sh
 
+    - name: Audit logging checks
+      run: |
+        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
+        sleep 1s
+        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
+
     - name: Test applications are accessible using ingress
       run: |
         ./scripts/test-apps.sh
