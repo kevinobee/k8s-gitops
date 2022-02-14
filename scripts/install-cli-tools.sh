@@ -45,6 +45,16 @@ kubectl krew list
 kubectl krew install resource-capacity
 kubectl resource-capacity version
 
+# Argo CD - ref: https://argo-cd.readthedocs.io/en/stable/cli_installation/
+if [ ! $(which argocd) ]; then
+  (
+    curl -Lo ./argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+    chmod +x ./argocd
+    sudo mv ./argocd ${targetDir}
+  )
+fi
+argocd version
+
 # # Datree
 # curl https://get.datree.io | /bin/bash
 
