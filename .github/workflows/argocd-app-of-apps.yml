@@ -49,6 +49,6 @@ jobs:
           --repo https://github.com/argoproj/argocd-example-apps.git \
           --path guestbook \
           --dest-server https://kubernetes.default.svc \
-          --dest-namespace default`
+          --dest-namespace default
         argocd app get guestbook
         argocd app sync guestbook
