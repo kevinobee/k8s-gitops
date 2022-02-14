@@ -6,7 +6,7 @@ on:
 
 jobs:
 
-  test-unit:
+  test-integration:
     name: Test cluster applications
     runs-on: ubuntu-latest
 
