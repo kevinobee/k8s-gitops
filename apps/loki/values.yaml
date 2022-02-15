@@ -3,22 +3,22 @@ loki:
 
   resources:
     limits:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
     requests:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
 
 promtail:
   enabled: true
 
   resources:
     limits:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
     requests:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
 
 fluent-bit:
   enabled: false
@@ -33,22 +33,22 @@ grafana:
 
   resources:
     limits:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
     requests:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
 
 prometheus:
   enabled: true
 
   resources:
     limits:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
     requests:
-      cpu: 400m
-      memory: 100Mi
+      cpu: 50m
+      memory: 50mi
 
   alertmanager:
     persistentVolume:
@@ -56,20 +56,20 @@ prometheus:
 
     resources:
       limits:
-        cpu: 100m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
       requests:
-        cpu: 100m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
 
   pushgateway:
     resources:
       limits:
-        cpu: 100m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
       requests:
-        cpu: 100m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
 
   server:
     persistentVolume:
@@ -77,11 +77,11 @@ prometheus:
 
     resources:
       limits:
-        cpu: 400m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
       requests:
-        cpu: 400m
-        memory: 100Mi
+        cpu: 50m
+        memory: 50mi
 
 filebeat:
   enabled: false
