@@ -9,3 +9,18 @@ namespace: metallb-system
 resources:
   - github.com/metallb/metallb//manifests?ref=v0.11.0
   - configmap.yaml
+
+
+patches:
+  - path: patches/controller.jsonpatch.yaml
+    target:
+      name: controller
+      kind: Deployment
+      group: apps
+      version: v1
+  - path: patches/speaker.jsonpatch.yaml
+    target:
+      name: speaker
+      kind: DaemonSet
+      group: apps
+      version: v1

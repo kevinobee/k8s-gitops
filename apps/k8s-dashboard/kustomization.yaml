@@ -10,4 +10,19 @@ resources:
 - https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 
 
+
+patches:
+  - path: base/patches/kubernetes-dashboard.jsonpatch.yaml
+    target:
+      name: kubernetes-dashboard
+      kind: Deployment
+      group: apps
+      version: v1
+  - path: base/patches/dashboard-metrics-scraper.jsonpatch.yaml
+    target:
+      name: dashboard-metrics-scraper
+      kind: Deployment
+      group: apps
+      version: v1
+
 namespace: kubernetes-dashboard

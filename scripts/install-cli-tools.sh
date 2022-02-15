@@ -42,6 +42,7 @@ kubectl krew version
 kubectl krew list
 
 # kube-capacity - ref: https://github.com/robscott/kube-capacity
+# install kubectl plugin
 kubectl krew install resource-capacity
 kubectl resource-capacity version
 
