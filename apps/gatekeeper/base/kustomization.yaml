@@ -12,3 +12,23 @@ resources:
 
   - constraints.yaml
 
+patches:
+  - path: patches/gatekeeper-audit.jsonpatch.yaml
+    target:
+      name: gatekeeper-audit
+      kind: Deployment
+      group: apps
+      version: v1
+  - path: patches/gatekeeper-controller-manager.jsonpatch.yaml
+    target:
+      name: gatekeeper-controller-manager
+      kind: Deployment
+      group: apps
+      version: v1
+  - path: patches/gatekeeper-policy-manager.jsonpatch.yaml
+    target:
+      name: gatekeeper-policy-manager
+      kind: Deployment
+      group: apps
+      version: v1
+
