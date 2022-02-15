@@ -56,10 +56,13 @@ fi
 argocd version --client
 echo
 
-# Trivy- ref: https://aquasecurity.github.io/trivy/v0.23.0/getting-started/installation/
+# Trivy - ref: https://aquasecurity.github.io/trivy/v0.23.0/getting-started/installation/
 if [ ! $(which trivy) ]; then
   (
     curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.23.0
+
+    # trivy-plugin-kubectl - ref: https://github.com/aquasecurity/trivy-plugin-kubectl
+    trivy plugin install github.com/aquasecurity/trivy-plugin-kubectl
   )
 fi
 echo "Trivy:"
