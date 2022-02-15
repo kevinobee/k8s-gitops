@@ -19,6 +19,7 @@ if [ ! $(which kind) ]; then
   )
 fi
 kind version
+echo
 
 # krew - ref: https://krew.sigs.k8s.io/docs/user-guide/setup/install/
 # macOS/Linux
@@ -38,12 +39,11 @@ if [ $? -ne 0 ]; then
   # add the $HOME/.krew/bin directory to your PATH environment variable
   export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 fi
-kubectl krew version
-kubectl krew list
 
 # kube-capacity - ref: https://github.com/robscott/kube-capacity
 kubectl krew install resource-capacity
 kubectl resource-capacity version
+echo
 
 # Argo CD - ref: https://argo-cd.readthedocs.io/en/stable/cli_installation/
 if [ ! $(which argocd) ]; then
@@ -53,7 +53,17 @@ if [ ! $(which argocd) ]; then
     sudo mv ./argocd ${targetDir}
   )
 fi
-argocd version --client   # client version only (no server required)
+argocd version --client
+echo
+
+# Trivy- ref: https://aquasecurity.github.io/trivy/v0.23.0/getting-started/installation/
+if [ ! $(which trivy) ]; then
+  (
+    curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.23.0
+  )
+fi
+echo "Trivy:"
+trivy --version
 
 # # Datree
 # curl https://get.datree.io | /bin/bash
