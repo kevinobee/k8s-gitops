@@ -1,0 +1,11 @@
+# kubectl patch sts argocd-application-controller -n argocd --type json --patch "$(cat argocd-application-controller.jsonpatch.yaml)"
+---
+- op: add
+  path: /spec/template/spec/containers/0/resources
+  value:
+    limits:
+      cpu: 600m
+      memory: 300Mi
+    requests:
+      cpu: 400m
+      memory: 300Mi
