@@ -12,6 +12,7 @@
       "controlplaneio",
       "crds",
       "Datree",
+      "datreeio",
       "devopsbest",
       "finalizer",
       "finalizers",
