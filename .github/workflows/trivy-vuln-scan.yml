@@ -20,15 +20,16 @@ jobs:
       - name: Run Trivy vulnerability scanner in IaC mode
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'config'
-          hide-progress: false
-          format: 'table'
+          scan-type: 'vuln,config'
+          hide-progress: true
           exit-code: '1'
           ignore-unfixed: true
           severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          format: 'sarif'
+          output: 'trivy-iac-results.sarif'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
         if: always() 
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: 'trivy-iac-results.sarif'
