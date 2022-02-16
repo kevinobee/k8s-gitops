@@ -53,7 +53,7 @@ if [ ! $(which argocd) ]; then
     sudo mv ./argocd ${targetDir}
   )
 fi
-argocd version
+argocd version --client   # client version only (no server required)
 
 # # Datree
 # curl https://get.datree.io | /bin/bash
