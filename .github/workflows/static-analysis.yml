@@ -68,7 +68,7 @@ jobs:
           name: kustomize
 
       - name: Run Datree to check for Kubernetes misconfiguration issues
-        run: datree test --schema-version 1.21.0 --ignore-missing-schemas kustomize.yaml || exit 0
+        run: datree test --schema-version 1.21.0 --ignore-missing-schemas --output simple kustomize.yaml || exit 0
 
   kube-score:
     name: kube-score
