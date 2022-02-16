@@ -21,7 +21,6 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'config'
-          hide-progress: true
           exit-code: '1'
           ignore-unfixed: true
           severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
