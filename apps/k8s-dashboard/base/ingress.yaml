@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: k8s.example.com
+  - host: k8s.local
     http:
       paths:
       - backend:
@@ -21,4 +21,4 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - k8s.example.com
+    - k8s.local

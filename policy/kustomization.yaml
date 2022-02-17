@@ -4,5 +4,8 @@ kind: Kustomization
 commonLabels:
   k8s-app: gatekeeper
 
+bases:
+  - github.com/open-policy-agent/gatekeeper-library/library/general
+
 resources:
-  - https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
+  - gatekeeper-constraints.yaml

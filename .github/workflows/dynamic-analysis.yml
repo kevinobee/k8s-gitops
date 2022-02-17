@@ -2,15 +2,15 @@ name: Dynamic Analysis
 
 on:
 
-  push:
-    branches: [ main ]
-    paths:
-      - 'apps/**'
+  # push:
+  #   branches: [ main ]
+  #   paths:
+  #     - 'apps/**'
 
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'apps/**'
+  # pull_request:
+  #   branches: [ main ]
+  #   paths:
+  #     - 'apps/**'
 
   workflow_dispatch:
 
@@ -22,32 +22,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
 
-    - name: Install latest version of Kind
+    - name: Run install script
       run: |
-        GO111MODULE=on go get sigs.k8s.io/kind
-
-    - name: Create Kind cluster
-      run: |
-        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
+        ./install.sh
 
     - name: Docker network checks
       run: |
         docker network inspect -f '{{.IPAM.Config}}' kind
 
-    - name: Install Cluster applications
+    - name: Check Audit logging
       run: |
-        ./scripts/install-apps.sh
-
-    - name: Audit logging checks
-      run: |
-        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
+        logCount1=$(docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l)
         sleep 1s
-        docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l
-
-    - name: Application ingress checks
-      run: |
-        ./scripts/test-apps.sh
+        logCount2=$(docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l)
+        if [ $logCount1 -eq $logCount2 ]; then exit 1 ; fi

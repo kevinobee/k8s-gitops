@@ -10,3 +10,4 @@ resources:
   - sealed-secrets-app.yaml
   - loki-app.yaml
   - gitea-app.yaml
+  - gatekeeper-policy.yaml

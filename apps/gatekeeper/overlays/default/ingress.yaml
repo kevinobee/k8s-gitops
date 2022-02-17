@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: gpm.example.com
+  - host: gpm.local
     http:
       paths:
       - path: /

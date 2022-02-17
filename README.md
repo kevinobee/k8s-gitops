@@ -4,23 +4,35 @@ Repository contains YAML manifests to bootstrap a Kubernetes cluster maintained 
 
 ## Getting Started
 
-The `scripts` folder contains bash shell scripts to help you get started running the repository applications in a local Kubernetes cluster.
+To install the Kubernetes cluster and applications for GitOps, run:
 
-Run the following scripts to install everything you will need:
-
-```Shell
-./install-cli-tools.sh    # only required to be performed on first run
-./create-kind-cluster.sh
-./install-apps.sh
+```shell
+git clone https://github.com/kevinobee/k8s-gitops.git
+cd k8s-gitops
+./install.sh
 ```
+
+The installation script uses the [Kind](https://kind.sigs.k8s.io/) tool, which offers a simple way of creating a local Kubernetes cluster with only a single dependency on Docker.
 
 Your cluster and applications are now running, time to start developing.
 
 ## Cluster Applications
 
+Applications running in the cluster are exposed via a load balancer and ingress as follows:
+
+* Argo CD
+
+  <https://argocd.local/>
+
+  Get the admin users password:
+
+  ```shell
+  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+  ```
+
 * Kubernetes dashboard
 
-  <https://k8s.example.com/>
+  <https://k8s.local/>
 
   Get the admin access token:
 
@@ -32,23 +44,13 @@ Your cluster and applications are now running, time to start developing.
   echo $TOKEN
   ```
 
-* Argo CD
-
-  <https://argocd.example.com/>
-
-  Get the admin users password:
-
-  ```shell
-  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
-  ```
-
 * Gatekeeper Policy Manager (GPM)
 
-  <https://gpm.example.com/>
+  <https://gpm.local/>
 
 * Monitoring UI
 
-  <https://loki.example.com>
+  <https://loki.local>
 
   Loki monitoring stack contains Promtail, Grafana and Prometheus
 
@@ -60,9 +62,30 @@ Your cluster and applications are now running, time to start developing.
 
 * Gitea
 
-  <https://git.example.com>
+  <https://git.local>
 
   Login as the `gitea` user with the password `gitea`
+
+### Host Names
+
+Setup entries for `.local` domain names in your `/etc/hosts` file by running the following commands after the `install.sh` script has completed:
+
+```shell
+LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
+echo "${LB_IP} argocd.local gpm.local k8s.local loki.local git.local" | sudo tee -a /etc/hosts
+```
+
+## GitOps
+
+To wire up GitOps applications in Argo CD run the following commands after the `install.sh` script:
+
+```shell
+# Create GitOps application in Argo CD (App of Apps)
+kubectl apply -k gitops
+
+# View Argo CD applications deployment status
+kubectl get applications.argoproj.io -n argocd
+```
 
 ## Build Automation
 
