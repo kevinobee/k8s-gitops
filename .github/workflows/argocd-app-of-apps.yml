@@ -12,27 +12,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-    - uses: clowdhaus/argo-cd-action/@main
-      name: Download Argo CD CLI
-      with:
-        version: 2.2.5
-        command: version
-        options: --client
 
-    - name: Install latest version of Kind
+    - name: Create Kind cluster and applications
       run: |
-        GO111MODULE=on go get sigs.k8s.io/kind
+        ./install.sh
 
-    - name: Create Kind cluster
+    - name: Setup GitOps
       run: |
-        PATH=$(go env GOPATH)/bin:$PATH kind create cluster --config kind-config.yaml --wait 1m
-
-    - name: Install Argo CD in cluster
-      run: |
-        ./scripts/install-argocd.sh
+        kubectl apply -k gitops
 
     - name: Run Port Forward for Argo CD API server to localhost:8080
       run: |
@@ -43,25 +30,10 @@ jobs:
         pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
         argocd login localhost:8080 --insecure --username admin --password ${pwd}
 
-    - name: Create Guestbook App from Git repository
+    - name: Get Argo CD Applications
       run: |
-        argocd app create guestbook \
-          --repo https://github.com/argoproj/argocd-example-apps.git \
-          --path guestbook \
-          --dest-server https://kubernetes.default.svc \
-          --dest-namespace default
-        argocd app get guestbook
-        argocd app sync guestbook
-        argocd app wait guestbook
-
-    - name: Create Argo CD App of Apps from Git repository
-      run: |
-        argocd app create gitops \
-          --repo https://github.com/kevinobee/k8s-gitops.git \
-          --path gitops \
-          --dest-server https://kubernetes.default.svc \
-          --dest-namespace default
         argocd app get gitops
         argocd app sync gitops
         argocd app wait gitops
         argocd app list
+        kubectl get applications.argoproj.io -n argocd

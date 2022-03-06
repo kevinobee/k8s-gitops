@@ -34,7 +34,6 @@ nodes:
             readOnly: false
             pathType: DirectoryOrCreate
 
-  # mount the local file on the control plane
   extraMounts:
   - hostPath: ./audit-policy.yaml
     containerPath: /etc/kubernetes/policies/audit-policy.yaml
@@ -50,4 +49,4 @@ nodes:
     protocol: TCP
 
 - role: worker
-
+- role: worker
