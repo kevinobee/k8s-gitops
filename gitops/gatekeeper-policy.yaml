@@ -15,6 +15,12 @@ spec:
     server: https://kubernetes.default.svc
     namespace: gatekeeper-system
   syncPolicy:
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 10
     syncOptions:
       - CreateNamespace=true
     automated:
