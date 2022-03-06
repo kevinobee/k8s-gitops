@@ -13,9 +13,13 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Create Kind cluster and setup GitOps
+    - name: Create Kind cluster and applications
       run: |
         ./install.sh
+
+    - name: Setup GitOps
+      run: |
+        kubectl apply -k gitops
 
     - name: Run Port Forward for Argo CD API server to localhost:8080
       run: |
@@ -32,3 +36,4 @@ jobs:
         argocd app sync gitops
         argocd app wait gitops
         argocd app list
+        kubectl get applications.argoproj.io -n argocd
