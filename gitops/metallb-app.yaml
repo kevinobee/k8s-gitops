@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-    path: apps/metallb/overlays/default
+    path: apps/metallb
   destination:
     namespace: metallb-system
     server: 'https://kubernetes.default.svc'
