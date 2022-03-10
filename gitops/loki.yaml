@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealed-secrets
+  name: loki
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,13 +10,11 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-    path: apps/sealed-secrets
+    path: apps/loki
   destination:
-    namespace: kube-system
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
+    namespace: monitoring
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=false
     automated:
       prune: true
       selfHeal: true

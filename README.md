@@ -16,20 +16,32 @@ The installation script uses the [Kind](https://kind.sigs.k8s.io/) tool, which o
 
 Your cluster and applications are now running, time to start developing.
 
-## Cluster Applications
+## Argo CD
 
-Applications running in the cluster are exposed via a load balancer and ingress as follows:
+The `install.sh` script creates the core applications in the cluster required for GitOps, primarily Argo CD.
 
-* Argo CD
+The Argo CD UI can be accessed by loading <https://argocd.local/> in a browser.
 
-  <https://argocd.local/>
+The `admin` users password is stored in `ARGOCD_PWD` environment variable by the `install.sh` script. Alternatively view the password by running the following commands:
 
-  Admin users password stored in `ARGOCD_PWD` environment variable.
+```shell
+export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+echo ${ARGOCD_PWD}
+```
 
-  ```shell
-  export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-  echo ${ARGOCD_PWD}
-  ```
+## GitOps
+
+To wire up GitOps applications in Argo CD run the following commands after the `install.sh` script:
+
+```shell
+# Create GitOps application in Argo CD (App of Apps)
+kubectl apply -f gitops.yaml
+
+# View Argo CD applications deployment status
+kubectl get applications.argoproj.io -n argocd
+```
+
+After Argo CD has synced the applications the following services will be exposed via a load balancer and ingress:
 
 * Kubernetes dashboard
 
@@ -73,18 +85,6 @@ Setup entries for `.local` domain names in your `/etc/hosts` file by running the
 ```shell
 LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
 echo "${LB_IP} argocd.local gpm.local k8s.local loki.local git.local" | sudo tee -a /etc/hosts
-```
-
-## GitOps
-
-To wire up GitOps applications in Argo CD run the following commands after the `install.sh` script:
-
-```shell
-# Create GitOps application in Argo CD (App of Apps)
-kubectl apply -k gitops
-
-# View Argo CD applications deployment status
-kubectl get applications.argoproj.io -n argocd
 ```
 
 ## Build Automation

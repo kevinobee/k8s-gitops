@@ -41,10 +41,7 @@ jobs:
     - name: Application ingress checks
       run: |
         apps=( \
-          "argocd" \
-          "gpm" \
-          "k8s" \
-          "loki"
+          "argocd"
         )
 
         LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')

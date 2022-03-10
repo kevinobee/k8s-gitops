@@ -4,13 +4,15 @@ kind: Kustomization
 commonLabels:
   k8s-app: argocd
 
-resources:
+bases:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.1/manifests/install.yaml
+
+resources:
   - namespace.yaml
   - ingress.yaml
   - helm-repository.yaml
 
 patchesStrategicMerge:
-  - argocd-cm.yaml
+  - overlays/argo-cd-cm.yaml
 
 namespace: argocd

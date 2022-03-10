@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gitops
+  name: gatekeeper
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -10,13 +10,11 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: main
-    path: gitops
+    path: apps/gatekeeper
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: gatekeeper-system
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true

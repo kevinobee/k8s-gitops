@@ -30,7 +30,7 @@ jobs:
 
     - name: Setup GitOps
       run: |
-        kubectl apply -k gitops
+        kubectl apply -f gitops.yaml
 
     - name: Run Port Forward for Argo CD API server to localhost:8080
       run: |
