@@ -24,24 +24,23 @@ Applications running in the cluster are exposed via a load balancer and ingress 
 
   <https://argocd.local/>
 
-  Get the admin users password:
+  Admin users password stored in `ARGOCD_PWD` environment variable.
 
   ```shell
-  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d && echo
+  export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+  echo ${ARGOCD_PWD}
   ```
 
 * Kubernetes dashboard
 
   <https://k8s.local/>
 
-  Get the admin access token:
+  Admin access token stored in `K8S_TOKEN` environment variable.
 
   ```shell
-  export TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
-
-  export TOKEN=$(kubectl get $TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 -d && echo)
-
-  echo $TOKEN
+  K8S_TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
+  export K8S_TOKEN=$(kubectl get $K8S_TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 --decode)
+  echo ${K8S_TOKEN}
   ```
 
 * Gatekeeper Policy Manager (GPM)
@@ -54,10 +53,11 @@ Applications running in the cluster are exposed via a load balancer and ingress 
 
   Loki monitoring stack contains Promtail, Grafana and Prometheus
 
-  Get the admin users password:
+  Admin users password stored in `LOKI_PWD` environment variable.
 
   ```shell
-  kubectl get secret --namespace monitoring loki-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+  export LOKI_PWD=$(kubectl get secret --namespace monitoring loki-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
+  echo ${LOKI_PWD}
   ```
 
 * Gitea
