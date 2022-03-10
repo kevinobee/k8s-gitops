@@ -6,11 +6,10 @@ commonLabels:
 
 namespace: argocd
 
-bases:
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.2.5/manifests/install.yaml
-
 resources:
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.2.5/manifests/install.yaml
   - namespace.yaml
+  - ingress.yaml
 
 patchesStrategicMerge:
   - argocd-cm.yaml
