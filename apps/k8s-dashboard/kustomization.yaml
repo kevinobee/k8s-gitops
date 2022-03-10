@@ -5,9 +5,8 @@ commonLabels:
   k8s-app: kubernetes-dashboard
 
 resources:
-- base/ingress.yaml
-- base/serviceaccount-admin.yaml
+- ingress.yaml
+- serviceaccount-admin.yaml
 - https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
-
 
 namespace: kubernetes-dashboard
