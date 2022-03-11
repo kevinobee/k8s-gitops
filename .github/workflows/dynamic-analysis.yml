@@ -1,23 +1,24 @@
-name: Dynamic Analysis
+name: Dynamic Analysis - Argo CD App of Apps
 
 on:
-
   push:
     branches: [ main ]
     paths:
       - 'apps/**'
+      - 'gitops/**'
 
   pull_request:
     branches: [ main ]
     paths:
       - 'apps/**'
+      - 'gitops/**'
 
   workflow_dispatch:
 
 jobs:
 
-  test-applications:
-    name: Applications available
+  run-test:
+    name: Argo CD App of Apps
     runs-on: ubuntu-latest
 
     steps:
@@ -38,13 +39,32 @@ jobs:
         logCount2=$(docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l)
         if [ $logCount1 -eq $logCount2 ]; then exit 1 ; fi
 
+    - name: Run Port Forward for Argo CD API server to localhost:8080
+      run: |
+        kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+
+    - name: Login to Argo CD using the CLI
+      run: |
+        pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
+        argocd login localhost:8080 --insecure --username admin --password ${pwd}
+
+    - name: Setup GitOps
+      run: |
+        kubectl apply -f gitops.yaml
+
+    - name: Get Argo CD Applications
+      run: |
+        argocd app get gitops
+        argocd app sync gitops
+        argocd app wait gitops
+        argocd app list
+        kubectl get applications.argoproj.io -n argocd
+
     - name: Application ingress checks
       run: |
+        kubectl get ing -A
         apps=( \
-          "argocd" \
-          "gpm" \
-          "k8s" \
-          "loki"
+          "argocd"
         )
 
         LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')

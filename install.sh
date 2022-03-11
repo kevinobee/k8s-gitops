@@ -36,7 +36,7 @@ if [ ! $(kind get clusters --quiet) ]; then
 fi
 
 echo "Install applications ..."
-kubectl kustomize apps --enable-helm | kubectl apply -f -
+kubectl kustomize apps/overlays/core --enable-helm | kubectl apply -f -
 echo
 echo "Wait for deployments ..."
 kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
@@ -49,16 +49,11 @@ echo
 echo "Application credentials:"
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 echo "Argo CD:   ${ARGOCD_PWD}"
-export LOKI_PWD=$(kubectl get secret --namespace monitoring loki-stack-grafana -o jsonpath="{.data.admin-password}" | base64 --decode)
-echo "Loki:      ${LOKI_PWD}"
-K8S_TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
-export K8S_TOKEN=$(kubectl get ${K8S_TOKEN_NAME} -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 --decode)
-echo "Dashboard: ${K8S_TOKEN}"
 
 echo
 echo "To create GitOps application in Argo CD (App of Apps) run the command:"
 echo
-echo "   kubectl apply -k gitops"
+echo "   kubectl apply -f gitops.yaml"
 echo
 echo "Watch applications in Argo CD by running:"
 echo
