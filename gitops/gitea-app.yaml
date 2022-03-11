@@ -40,3 +40,17 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitea-charts
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: gitea
+  url: https://dl.gitea.io/charts/
+  type: helm
