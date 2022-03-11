@@ -1,6 +1,17 @@
 name: Dynamic Analysis - Argo CD App of Apps
 
 on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+      - 'gitops/**'
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/**'
+      - 'gitops/**'
 
   workflow_dispatch:
 
