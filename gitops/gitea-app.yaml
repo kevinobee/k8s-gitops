@@ -27,8 +27,6 @@ spec:
           value: '/'
         - name: ingress.hosts[0].paths[0].pathType
           value: 'Prefix'
-        - name: gitea.startupProbe.enabled
-          value: 'true'
         - name: gitea.metrics.enabled
           value: 'true'
   destination:
