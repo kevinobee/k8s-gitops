@@ -64,7 +64,7 @@ Applications running in the cluster are exposed via a load balancer and ingress 
 
   <https://git.local>
 
-  Login as the `gitea` user with the password `gitea`
+  Login as the `gitea` user with the password `ChangeMe`
 
 ### Host Names
 
