@@ -4,8 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: metallb
 
-namespace: metallb-system
-
 resources:
   - github.com/metallb/metallb//manifests?ref=v0.11.0
   - configmap.yaml
+  - helm-repository.yaml
+
+namespace: metallb-system
