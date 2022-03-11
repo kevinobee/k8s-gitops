@@ -5,7 +5,7 @@ commonLabels:
   k8s-app: argocd
 
 resources:
-  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.2.5/manifests/install.yaml
+  - https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.1/manifests/install.yaml
   - namespace.yaml
   - ingress.yaml
   - helm-repository.yaml
