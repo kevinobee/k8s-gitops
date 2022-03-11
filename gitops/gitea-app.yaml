@@ -17,8 +17,14 @@ spec:
           value: ChangeMe
         - name: ingress.enabled
           value: 'true'
-        - name: 'ingress.className'
+        - name: ingress.className
           value: 'nginx'
+        - name: ingress.hosts[0].host
+          value: 'git.local'
+        - name: ingress.hosts[0].paths[0].path
+          value: '/'
+        - name: ingress.hosts[0].paths[0].pathType
+          value: 'Prefix'
         - name: gitea.startupProbe.enabled
           value: 'true'
         - name: gitea.metrics.enabled
