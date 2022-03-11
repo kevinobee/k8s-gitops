@@ -13,8 +13,10 @@ spec:
     chart: gitea
     helm:
       parameters:
+        - name: gitea.admin.username
+          value: 'gitea'
         - name: gitea.admin.password
-          value: ChangeMe
+          value: 'ChangeMe'
         - name: ingress.enabled
           value: 'true'
         - name: ingress.className
