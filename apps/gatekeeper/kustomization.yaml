@@ -1,15 +1,16 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: gatekeeper-system
-
 commonLabels:
   k8s-app: gatekeeper
 
-resources:
+bases:
   - https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
-
-  # Gatekeeper Policy Manager (GPM)
+  - github.com/open-policy-agent/gatekeeper-library/library/general
   - github.com/sighupio/gatekeeper-policy-manager?ref=v0.5.1
 
+resources:
   - ingress.yaml
+  - constraints/cluster-constraints.yaml
+
+namespace: gatekeeper-system
