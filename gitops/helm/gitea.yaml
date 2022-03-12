@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: metallb-helm
+  name: gitea-charts
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  name: metallb
-  url: https://kubernetes.github.io/ingress-nginx
+  name: gitea
+  url: https://dl.gitea.io/charts/
   type: helm

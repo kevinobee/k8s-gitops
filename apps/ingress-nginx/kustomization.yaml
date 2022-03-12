@@ -6,7 +6,6 @@ commonLabels:
 
 resources:
   - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
-  - helm-repository.yaml
   
 patchesStrategicMerge:
   - CVE-2021-25742-configmap.yaml
