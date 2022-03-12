@@ -10,7 +10,7 @@ resources:
   - namespace.yaml
   - ingress.yaml
 
-helmCharts:  TODO
+helmCharts:
   - name: loki-stack
     repo: https://grafana.github.io/helm-charts/
     version: 2.6.1
