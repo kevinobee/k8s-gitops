@@ -21,6 +21,7 @@
       "GOPATH",
       "Grafana",
       "IPAM",
+      "jsonnet",
       "jsonpath",
       "k8s",
       "karancode",

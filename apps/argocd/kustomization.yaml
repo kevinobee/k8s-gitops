@@ -10,7 +10,6 @@ bases:
 resources:
   - namespace.yaml
   - ingress.yaml
-  - helm-repository.yaml
 
 patchesStrategicMerge:
   - overlays/argo-cd-cm.yaml
