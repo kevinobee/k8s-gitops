@@ -3,6 +3,7 @@ kind: Kustomization
 
 bases:
   - apps/overlays/full
+  - policy
 
 resources:
   - gitops.yaml
