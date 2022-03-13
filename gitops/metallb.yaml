@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
-    targetRevision: main
+    targetRevision: HEAD
     path: apps/metallb
   destination:
     namespace: metallb-system
