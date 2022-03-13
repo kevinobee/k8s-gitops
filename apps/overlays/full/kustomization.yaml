@@ -6,5 +6,6 @@ bases:
 
   - ../../dashboard-ui
   - ../../gatekeeper
+  - ../../gitea
   - ../../loki
   - ../../sealed-secrets
