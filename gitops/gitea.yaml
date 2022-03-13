@@ -8,33 +8,13 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://dl.gitea.io/charts/'
-    targetRevision: 5.0.2
-    chart: gitea
-    helm:
-      parameters:
-        - name: gitea.admin.username
-          value: 'gitea'
-        - name: gitea.admin.password
-          value: 'ChangeMe'
-        - name: ingress.enabled
-          value: 'true'
-        - name: ingress.className
-          value: 'nginx'
-        - name: ingress.hosts[0].host
-          value: 'git.local'
-        - name: ingress.hosts[0].paths[0].path
-          value: '/'
-        - name: ingress.hosts[0].paths[0].pathType
-          value: 'Prefix'
-        - name: gitea.metrics.enabled
-          value: 'true'
+    repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
+    targetRevision: main
+    path: apps/gitea
   destination:
     namespace: gitea
     server: 'https://kubernetes.default.svc'
   syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
