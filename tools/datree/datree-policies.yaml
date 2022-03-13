@@ -69,8 +69,6 @@ policies:
     rules:
       - identifier: INGRESS_INCORRECT_HOST_VALUE_PERMISSIVE
         messageOnFailure: Incorrect value for key `host` - specify host instead of using a wildcard character ("*")
-      - identifier: CONTAINERS_MISSING_IMAGE_VALUE_VERSION
-        messageOnFailure: Incorrect value for key `image` - specify an image version to avoid unpleasant "version surprises" in the future
       - identifier: CRONJOB_INVALID_SCHEDULE_VALUE
         messageOnFailure: 'Incorrect value for key `schedule` - the (cron) schedule expressions is not valid and therefor, will not work as expected'
       - identifier: WORKLOAD_INCORRECT_RESTARTPOLICY_VALUE_ALWAYS
