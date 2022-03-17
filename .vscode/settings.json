@@ -39,6 +39,7 @@
       "Promtail",
       "restrictor",
       "rolebinding",
+      "rollouts",
       "sarif",
       "serviceaccount",
       "sighupio",
