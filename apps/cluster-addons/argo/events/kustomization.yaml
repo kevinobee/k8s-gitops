@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  k8s-app: argo
+
+bases:
+  # - github.com/argoproj/argo-events/manifests/cluster-install
+  # OR
+  - github.com/argoproj/argo-events/manifests/namespace-install
+
+resources:
+- namespace.yaml
+
+namespace: argo-events
