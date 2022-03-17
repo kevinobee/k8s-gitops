@@ -18,7 +18,8 @@ fi
 brewTools=( \
   "kubectl" \
   "kind" \
-  "argocd"
+  "argocd" \
+  "argo"
 )
 
 for i in "${brewTools[@]}"
