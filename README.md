@@ -78,7 +78,7 @@ Setup entries for `.local` domain names in your `/etc/hosts` file by running the
 
 ```shell
 LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "${LB_IP} argocd.local gpm.local k8s.local loki.local git.local" | sudo tee -a /etc/hosts
+echo "${LB_IP} argocd.local gpm.local k8s.local loki.local" | sudo tee -a /etc/hosts
 ```
 
 ## Build Automation
