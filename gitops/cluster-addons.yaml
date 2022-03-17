@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: argo-cluster-addons
+  name: cluster-addons
 spec:
   generators:
   - git:
       repoURL: https://github.com/kevinobee/k8s-gitops.git
       revision: HEAD
       directories:
-      - path: apps/cluster-addons/argo/*
+      - path: apps/cluster-addons/*
   template:
     metadata:
       name: '{{path.basename}}'
