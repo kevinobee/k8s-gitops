@@ -72,12 +72,6 @@ After Argo CD has synced the applications the following services will be exposed
   echo ${LOKI_PWD}
   ```
 
-* Gitea
-
-  <https://git.local>
-
-  Login as the `gitea` user with the password `ChangeMe`
-
 ### Host Names
 
 Setup entries for `.local` domain names in your `/etc/hosts` file by running the following commands after the `install.sh` script has completed:
@@ -118,7 +112,3 @@ Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/w
   Gatekeeper Policy Manager is a simple read-only web UI for viewing OPA Gatekeeper policies' status in a Kubernetes Cluster.
 
 * [Snyk Infrastructure as Code Action](https://github.com/snyk/actions/tree/master/iac)
-
-### Developer Applications
-
-* [Gitea](https://gitea.com/)
