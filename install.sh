@@ -38,7 +38,7 @@ fi
 
 echo "Install applications ..."
 kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
-kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
+kubectl kustomize apps/cluster-addons/ingress-nginx --enable-helm | kubectl apply -f -
 kubectl kustomize apps/metallb | kubectl apply -f -
 echo
 echo "Wait for deployments ..."

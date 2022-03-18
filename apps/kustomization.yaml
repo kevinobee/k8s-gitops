@@ -5,7 +5,6 @@ bases:
   - argocd
   - cluster-addons
   - gatekeeper
-  - ingress-nginx
   - loki
   - metallb
   - sealed-secrets
