@@ -5,6 +5,7 @@ bases:
   - argo
   - argo-events
   - argo-rollouts
+  - gatekeeper-system
   - ingress-nginx
   - kubernetes-dashboard
   - metallb-system
