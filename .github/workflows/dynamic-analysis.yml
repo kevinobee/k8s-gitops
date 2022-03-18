@@ -28,6 +28,10 @@ jobs:
       run: |
         ./install.sh
 
+    - name: Wait for GitOps to be Healthy
+      run: |
+        argocd app wait gitops --health
+
     - name: Docker network checks
       run: |
         docker network inspect -f '{{.IPAM.Config}}' kind
@@ -38,45 +42,3 @@ jobs:
         sleep 1s
         logCount2=$(docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l)
         if [ $logCount1 -eq $logCount2 ]; then exit 1 ; fi
-
-    - name: Run Port Forward for Argo CD API server to localhost:8080
-      run: |
-        kubectl port-forward svc/argocd-server -n argocd 8080:443 &
-
-    - name: Login to Argo CD using the CLI
-      run: |
-        pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
-        argocd login localhost:8080 --insecure --username admin --password ${pwd}
-
-    - name: Setup GitOps
-      run: |
-        kubectl apply -f gitops.yaml
-
-    - name: Wait for Argo CD to Sync Applications
-      run: |
-        argocd app wait gitops
-        argocd app list
-        kubectl get applications.argoproj.io -n argocd
-
-    - name: Application ingress checks
-      run: |
-        kubectl get ing -A
-        apps=( \
-          "argocd"
-        )
-
-        LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        LB_URL="https://${LB_IP}"
-
-        for i in "${apps[@]}"
-        do
-          HOST="${i}.local"
-
-          echo "Check ${HOST} ... "
-
-          STATUS=$(curl -L -H "Host: ${HOST}" --insecure -s -o /dev/null -w '%{http_code}' ${LB_URL})
-          if [ $STATUS -ne 444 ] && [ $STATUS -ne 200 ]; then
-            echo "*** Failed, access to Host: ${HOST} at ${LB_URL} (Status Code: $STATUS)"
-            exit 1
-          fi
-        done

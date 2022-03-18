@@ -37,26 +37,21 @@ if [ ! $(kind get clusters --quiet) ]; then
 fi
 
 echo "Install applications ..."
-kubectl kustomize apps/overlays/core --enable-helm | kubectl apply -f -
+kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
+kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
+kubectl kustomize apps/metallb | kubectl apply -f -
 echo
 echo "Wait for deployments ..."
 kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
-kubectl -n ingress-nginx wait --timeout=120s --for=condition=Available deployment ingress-nginx-controller
-kubectl -n ingress-nginx wait --timeout=200s --for=condition=ready pod --selector=app.kubernetes.io/component=controller
-echo
-kubectl get ing -A
+
+echo "Create GitOps application in Argo CD (App of Apps) ..."
+kubectl apply -f gitops.yaml
 
 echo
-echo "Application credentials:"
+kubectl port-forward svc/argocd-server -n argocd 8080:443 1>/dev/null 2>&1 &
+pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-echo "Argo CD:   ${ARGOCD_PWD}"
-
+argocd login --insecure --username admin --password ${pwd} localhost:8080
 echo
-echo "To create GitOps application in Argo CD (App of Apps) run the command:"
-echo
-echo "   kubectl apply -f gitops.yaml"
-echo
-echo "Watch applications in Argo CD by running:"
-echo
-echo "   kubectl get applications.argoproj.io -n argocd -w"
-echo
+echo "Wait for Argo CD to Sync Applications ..."
+argocd app wait gitops --sync
