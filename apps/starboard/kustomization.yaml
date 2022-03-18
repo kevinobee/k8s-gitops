@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  k8s-app: starboard
+
+resources:
+  - namespace.yaml
+
+helmCharts:
+  - name: starboard-operator
+    repo: https://aquasecurity.github.io/helm-charts/
+    version: 0.9.1
+    releaseName: starboard-operator
+    namespace: starboard-system
+    valuesFile: values.yaml
+
+namespace: starboard-system

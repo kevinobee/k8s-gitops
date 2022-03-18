@@ -8,3 +8,4 @@ bases:
   - ../../gatekeeper
   - ../../loki
   - ../../sealed-secrets
+  - ../../starboard

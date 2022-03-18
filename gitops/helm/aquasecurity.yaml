@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aquasecurity-helm
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  name: aquasecurity
+  url: https://aquasecurity.github.io/helm-charts/
+  type: helm
