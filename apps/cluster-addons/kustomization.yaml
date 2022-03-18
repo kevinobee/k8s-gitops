@@ -8,4 +8,3 @@ bases:
   - gatekeeper-system
   - ingress-nginx
   - kubernetes-dashboard
-  - metallb-system

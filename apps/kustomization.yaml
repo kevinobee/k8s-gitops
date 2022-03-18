@@ -5,4 +5,5 @@ bases:
   - argocd
   - cluster-addons
   - loki
+  - metallb
   - sealed-secrets
