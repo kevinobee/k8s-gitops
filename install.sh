@@ -48,20 +48,13 @@ echo "Create GitOps application in Argo CD (App of Apps) ..."
 kubectl apply -f gitops.yaml
 
 echo
-kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+kubectl port-forward svc/argocd-server -n argocd 8080:443 1>/dev/null 2>&1 &
 pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
-argocd login localhost:8080 --insecure --username admin --password ${pwd}
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+argocd login --insecure --username admin --password ${pwd} localhost:8080
 echo
 echo "Argo CD:     http://localhost:8080"
 echo "Credentials: ${ARGOCD_PWD}"
 echo
 echo "Wait for Argo CD to Sync Applications ..."
-argocd app wait gitops
-
-echo
-echo "Start the Argo CD dashboard with the command:"
-echo
-echo "argocd admin dashboard -n argocd"
-echo
-
+argocd app wait gitops --sync
