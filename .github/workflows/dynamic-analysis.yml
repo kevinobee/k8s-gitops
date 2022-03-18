@@ -28,6 +28,10 @@ jobs:
       run: |
         ./install.sh
 
+    - name: Wait for GitOps to be Healthy
+      run: |
+        argocd app wait gitops --health
+
     - name: Docker network checks
       run: |
         docker network inspect -f '{{.IPAM.Config}}' kind
