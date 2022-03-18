@@ -52,10 +52,8 @@ jobs:
       run: |
         kubectl apply -f gitops.yaml
 
-    - name: Get Argo CD Applications
+    - name: Wait for Argo CD to Sync Applications
       run: |
-        argocd app get gitops
-        argocd app sync gitops
         argocd app wait gitops
         argocd app list
         kubectl get applications.argoproj.io -n argocd
