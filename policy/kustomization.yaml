@@ -7,7 +7,9 @@ commonLabels:
 bases:
   - github.com/open-policy-agent/gatekeeper-library/library/general
 
-resources:
-  - constraints/cluster-constraints.yaml
+# Issue: using app-of-apps pattern and orchestrating synchronization using sync waves
+# ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/1.7-1.8/#health-assessment-of-argoprojioapplication-crd-has-been-removed
+# resources:
+#   - constraints/cluster-constraints.yaml
 
 namespace: gatekeeper-system
