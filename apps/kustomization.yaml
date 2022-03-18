@@ -6,5 +6,4 @@ bases:
   - cluster-addons
   - gatekeeper
   - loki
-  - metallb
   - sealed-secrets

@@ -7,3 +7,4 @@ bases:
   - argo-rollouts
   - ingress-nginx
   - kubernetes-dashboard
+  - metallb-system
