@@ -39,7 +39,7 @@ fi
 echo "Install applications ..."
 kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
 kubectl kustomize apps/cluster-addons/ingress-nginx --enable-helm | kubectl apply -f -
-kubectl kustomize apps/cluster-addons/metallb | kubectl apply -f -
+kubectl kustomize apps/cluster-addons/metallb-system | kubectl apply -f -
 echo
 echo "Wait for deployments ..."
 kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
