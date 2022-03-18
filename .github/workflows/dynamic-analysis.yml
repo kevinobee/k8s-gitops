@@ -42,26 +42,3 @@ jobs:
         sleep 1s
         logCount2=$(docker exec kind-control-plane cat /var/log/kubernetes/kube-apiserver-audit.log | wc -l)
         if [ $logCount1 -eq $logCount2 ]; then exit 1 ; fi
-
-    - name: Application ingress checks
-      run: |
-        kubectl get ing -A
-        apps=( \
-          "argocd"
-        )
-
-        LB_IP=$(kubectl get svc/ingress-nginx-controller -n ingress-nginx -o=jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        LB_URL="https://${LB_IP}"
-
-        for i in "${apps[@]}"
-        do
-          HOST="${i}.local"
-
-          echo "Check ${HOST} ... "
-
-          STATUS=$(curl -L -H "Host: ${HOST}" --insecure -s -o /dev/null -w '%{http_code}' ${LB_URL})
-          if [ $STATUS -ne 444 ] && [ $STATUS -ne 200 ]; then
-            echo "*** Failed, access to Host: ${HOST} at ${LB_URL} (Status Code: $STATUS)"
-            exit 1
-          fi
-        done
