@@ -6,5 +6,4 @@ bases:
   - argo-events
   - argo-rollouts
   - gatekeeper-system
-  - ingress-nginx
   - kubernetes-dashboard

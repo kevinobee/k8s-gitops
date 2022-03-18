@@ -4,6 +4,7 @@ kind: Kustomization
 bases:
   - argocd
   - cluster-addons
+  - ingress-nginx
   - loki
   - metallb
   - sealed-secrets
