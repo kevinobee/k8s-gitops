@@ -1,4 +1,4 @@
-targetNamespaces: default
+targetNamespaces: ''
 
 trivy:
   ignoreUnfixed: true
