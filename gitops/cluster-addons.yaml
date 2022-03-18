@@ -9,6 +9,8 @@ spec:
       revision: HEAD
       directories:
       - path: apps/cluster-addons/*
+      - exclude: true
+        path: apps/cluster-addons/argo-rollouts
   template:
     metadata:
       name: '{{path.basename}}'
