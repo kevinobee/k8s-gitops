@@ -53,8 +53,5 @@ pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.da
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 argocd login --insecure --username admin --password ${pwd} localhost:8080
 echo
-echo "Argo CD:     http://localhost:8080"
-echo "Credentials: ${ARGOCD_PWD}"
-echo
 echo "Wait for Argo CD to Sync Applications ..."
 argocd app wait gitops --sync
