@@ -37,26 +37,28 @@ if [ ! $(kind get clusters --quiet) ]; then
 fi
 
 echo "Install applications ..."
-kubectl kustomize apps/overlays/core --enable-helm | kubectl apply -f -
+kubectl kustomize apps/metallb | kubectl apply -f -
+kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
+kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
 echo
 echo "Wait for deployments ..."
 kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
+
+echo "Create GitOps application in Argo CD (App of Apps) ..."
+kubectl apply -f gitops.yaml
+
+echo
+kubectl port-forward svc/argocd-server -n argocd 8080:443 &
+pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
+argocd login localhost:8080 --insecure --username admin --password ${pwd}
+export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+echo
+echo "Argo CD:     http://localhost:8080"
+echo "Credentials: ${ARGOCD_PWD}"
+echo
+echo "Wait for Argo CD to Sync Applications ..."
+argocd app wait gitops
 kubectl -n ingress-nginx wait --timeout=120s --for=condition=Available deployment ingress-nginx-controller
 kubectl -n ingress-nginx wait --timeout=200s --for=condition=ready pod --selector=app.kubernetes.io/component=controller
 echo
 kubectl get ing -A
-
-echo
-echo "Application credentials:"
-export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-echo "Argo CD:   ${ARGOCD_PWD}"
-
-echo
-echo "To create GitOps application in Argo CD (App of Apps) run the command:"
-echo
-echo "   kubectl apply -f gitops.yaml"
-echo
-echo "Watch applications in Argo CD by running:"
-echo
-echo "   kubectl get applications.argoproj.io -n argocd -w"
-echo
