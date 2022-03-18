@@ -3,8 +3,7 @@ kind: Kustomization
 
 bases:
   - argocd
-  - dashboard-ui
-  - gatekeeper
+  - cluster-addons
   - ingress-nginx
   - loki
   - metallb
