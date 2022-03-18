@@ -37,9 +37,9 @@ if [ ! $(kind get clusters --quiet) ]; then
 fi
 
 echo "Install applications ..."
-kubectl kustomize apps/metallb | kubectl apply -f -
-kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
 kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
+kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
+kubectl kustomize apps/metallb | kubectl apply -f -
 echo
 echo "Wait for deployments ..."
 kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
@@ -58,7 +58,10 @@ echo "Credentials: ${ARGOCD_PWD}"
 echo
 echo "Wait for Argo CD to Sync Applications ..."
 argocd app wait gitops
-kubectl -n ingress-nginx wait --timeout=120s --for=condition=Available deployment ingress-nginx-controller
-kubectl -n ingress-nginx wait --timeout=200s --for=condition=ready pod --selector=app.kubernetes.io/component=controller
+
 echo
-kubectl get ing -A
+echo "Start the Argo CD dashboard with the command:"
+echo
+echo "argocd admin dashboard -n argocd"
+echo
+
