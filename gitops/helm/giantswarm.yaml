@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: loki-stack-helm
+  name: giantswarm-helm
   namespace: argocd
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
-  name: loki-stack
-  url: https://grafana.github.io/helm-charts/
+  name: giantswarm
+  url: https://giantswarm.github.io/giantswarm-catalog
   type: helm

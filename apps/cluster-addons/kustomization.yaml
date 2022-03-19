@@ -7,3 +7,4 @@ bases:
   - argo-rollouts
   - gatekeeper-system
   - kubernetes-dashboard
+  - starboard-system
