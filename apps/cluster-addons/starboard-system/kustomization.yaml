@@ -15,4 +15,10 @@ helmCharts:
     namespace: starboard-system
     valuesFile: values.yaml
 
+  - name: starboard-exporter
+    repo: https://giantswarm.github.io/giantswarm-catalog
+    version: 0.3.0
+    releaseName: starboard-exporter
+    namespace: starboard-system
+
 namespace: starboard-system
