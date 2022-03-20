@@ -3,6 +3,7 @@ kind: Kustomization
 
 bases:
   - argocd
+  - cert-manager
   - cluster-addons
   - ingress-nginx
   - loki

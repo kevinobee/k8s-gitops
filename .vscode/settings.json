@@ -22,6 +22,7 @@
       "GOPATH",
       "Grafana",
       "IPAM",
+      "jetstack",
       "jsonnet",
       "jsonpath",
       "k8s",
