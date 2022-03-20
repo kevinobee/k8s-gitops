@@ -6,6 +6,7 @@ commonLabels:
 
 resources:
   - namespace.yaml
+  - https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
 
 helmCharts:
   - name: cert-manager
