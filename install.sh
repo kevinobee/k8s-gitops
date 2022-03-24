@@ -19,10 +19,12 @@ brewTools=( \
   "kubectl" \
   "kubectx" \
   "kind" \
-  "argocd" \
-  "argo" \
-  "octant" \
-  "kubeseal"
+  "argocd"
+
+  # optional tools
+  # "argo" \
+  # "octant" \
+  # "kubeseal"
 )
 
 for i in "${brewTools[@]}"
