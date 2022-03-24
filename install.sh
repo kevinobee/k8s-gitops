@@ -51,12 +51,12 @@ kubectl apply -f gitops.yaml
 
 echo
 echo "Wait for Argo CD to sync applications ..."
-kubectl ns argocd
+kubens argocd
 argocd app sync gitops
 
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 echo
 argocd admin dashboard &
-kubectl ns default
+kubens -
 echo
 
