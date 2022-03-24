@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: gitops
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
@@ -13,11 +11,6 @@ spec:
     path: gitops
     directory:
       recurse: true
-      jsonnet: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false
