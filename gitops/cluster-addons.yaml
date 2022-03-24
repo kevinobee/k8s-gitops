@@ -3,6 +3,8 @@ kind: ApplicationSet
 metadata:
   name: cluster-addons
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   generators:
   - git:
@@ -15,6 +17,8 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
     spec:
       project: default
       source:
@@ -24,7 +28,7 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
+      # syncPolicy:
+      #   automated:
+      #     prune: true
+      #     selfHeal: true
