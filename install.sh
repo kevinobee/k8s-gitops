@@ -17,6 +17,7 @@ fi
 
 brewTools=( \
   "kubectl" \
+  "kubectx" \
   "kind" \
   "argocd" \
   "argo" \
@@ -33,27 +34,29 @@ do
 done
 
 if [ ! $(kind get clusters --quiet) ]; then
+  echo "Create Kind cluster ..."
   kind create cluster --config kind-config.yaml --wait 1m
   kubectl wait node --all --for condition=ready
   kubectl cluster-info --context kind-kind
 fi
 
-echo "Install applications ..."
-kubectl kustomize apps/argocd --load-restrictor='LoadRestrictionsNone' | kubectl apply -f -
-kubectl kustomize apps/ingress-nginx --enable-helm | kubectl apply -f -
-kubectl kustomize apps/metallb | kubectl apply -f -
-echo
-echo "Wait for deployments ..."
-kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
+if [[ ! $(kubectl get namespace | grep argocd) ]]; then
+  echo "Install Argo CD ..."
+  kubectl kustomize apps/argocd | kubectl apply -f -
+  kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
+fi
 
 echo "Create GitOps application in Argo CD (App of Apps) ..."
 kubectl apply -f gitops.yaml
 
 echo
-kubectl port-forward svc/argocd-server -n argocd 8080:443 1>/dev/null 2>&1 &
-pwd=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo)
+echo "Wait for Argo CD to sync applications ..."
+kubectl ns argocd
+argocd app sync gitops
+
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-argocd login --insecure --username admin --password ${pwd} localhost:8080
 echo
-echo "Wait for Argo CD to Sync Applications ..."
-argocd app wait gitops --sync
+argocd admin dashboard &
+kubectl ns default
+echo
+
