@@ -17,14 +17,14 @@ fi
 
 brewTools=( \
   "kubectl" \
-  "kubectx" \
   "kind" \
   "argocd"
 
-  # optional tools
-  # "argo" \
-  # "octant" \
-  # "kubeseal"
+  # useful tools:
+  #   "argo"
+  #   "kubectx"
+  #   "kubeseal
+  #   "octant"
 )
 
 for i in "${brewTools[@]}"
@@ -48,17 +48,20 @@ if [[ ! $(kubectl get namespace | grep argocd) ]]; then
   kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
 fi
 
+kubectl port-forward svc/argocd-server -n argocd 8080:443 1>/dev/null 2>&1 &
+export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
+
+echo
 echo "Create GitOps application in Argo CD (App of Apps) ..."
 kubectl apply -f gitops.yaml
 
 echo
 echo "Wait for Argo CD to sync applications ..."
-kubens argocd
 argocd app sync gitops
+argocd app wait gitops --health
 
-export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 echo
-argocd admin dashboard &
-kubens -
+echo "Argo CD:     https://localhost:8080"
+echo "Credentials: ${ARGOCD_PWD}"
 echo
-
