@@ -3,21 +3,12 @@ kind: Application
 metadata:
   name: gitops
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: HEAD
     path: gitops
-    directory:
-      recurse: true
-      jsonnet: {}
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: false

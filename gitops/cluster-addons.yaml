@@ -2,6 +2,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: cluster-addons
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   generators:
   - git:
@@ -14,6 +17,8 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: "5"
     spec:
       project: default
       source:
