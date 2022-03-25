@@ -20,7 +20,7 @@ Your cluster and applications are now running, time to start developing.
 
 The `install.sh` script creates the core applications in the cluster required for GitOps, primarily Argo CD.
 
-The Argo CD UI can be accessed by loading <https://argocd.local/> in a browser.
+The Argo CD UI can be accessed by loading <https://localhost:8080/> in a browser.
 
 The `admin` users password is stored in `ARGOCD_PWD` environment variable by the `install.sh` script. Alternatively view the password by running the following commands:
 
@@ -78,7 +78,7 @@ Setup entries for `.local` domain names in your `/etc/hosts` file by running the
 
 ```shell
 LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "${LB_IP} argocd.local gpm.local k8s.local loki.local" | sudo tee -a /etc/hosts
+echo "${LB_IP} gpm.local k8s.local loki.local" | sudo tee -a /etc/hosts
 ```
 
 ## Build Automation
