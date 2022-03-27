@@ -6,3 +6,4 @@ commonLabels:
 
 resources:
   - linkerd.yaml
+  - viz-extension.yaml
