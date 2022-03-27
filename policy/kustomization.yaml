@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: policy
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+  
 bases:
   - github.com/open-policy-agent/gatekeeper-library/library/general
 
