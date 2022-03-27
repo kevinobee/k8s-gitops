@@ -70,6 +70,6 @@ argocd app sync gitops
 argocd admin dashboard -n argocd 1>/dev/null 2>&1 &
 
 echo
-echo "Argo CD:     https://localhost:8080"
+echo "Argo CD:     http://localhost:8080"
 echo "Credentials: ${ARGOCD_PWD}"
 echo
