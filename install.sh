@@ -18,7 +18,8 @@ fi
 brewTools=( \
   "kubectl" \
   "kind" \
-  "argocd"
+  "argocd" \
+  "linkerd"
 
   # useful tools:
   #   "argo"
