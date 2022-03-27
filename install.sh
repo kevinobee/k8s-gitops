@@ -45,7 +45,7 @@ fi
 
 if [[ ! $(kubectl get namespace | grep linkerd) ]]; then
   echo "Install Service Mesh ..."
-  kubectl kustomize apps/linkerd | kubectl apply -f -
+  linkerd install | kubectl apply -f -
   linkerd check
 fi
 
