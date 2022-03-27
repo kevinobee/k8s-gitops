@@ -59,6 +59,7 @@ kubectl apply -f gitops.yaml
 
 echo
 echo "Wait for Argo CD to sync applications ..."
+sleep 2s
 argocd app sync gitops
 
 echo
