@@ -37,7 +37,6 @@ do
 done
 
 if [ ! $(kind get clusters --quiet) ]; then
-  echo "Create Kind cluster ..."
   kind create cluster --config kind-config.yaml --wait 1m
   kubectl wait node --all --for condition=ready
   kubectl cluster-info --context kind-kind
@@ -65,7 +64,7 @@ kubectl apply -f gitops.yaml
 
 echo
 echo "Wait for Argo CD to sync applications ..."
-sleep 2s
+sleep 5s
 argocd app sync gitops
 
 echo
