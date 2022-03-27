@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
-    targetRevision: main
+    targetRevision: HEAD
     path: apps/linkerd
   destination:
     server: https://kubernetes.default.svc
