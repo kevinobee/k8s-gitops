@@ -46,7 +46,6 @@ if [[ ! $(kubectl get namespace | grep linkerd) ]]; then
   echo "Install Service Mesh ..."
   linkerd install | kubectl apply -f -
   linkerd check
-  linkerd viz install | kubectl apply -f -
 fi
 
 if [[ ! $(kubectl get namespace | grep argocd) ]]; then
