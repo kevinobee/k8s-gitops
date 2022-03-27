@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: starboard
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 resources:
   - namespace.yaml
   - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/ciskubebenchreports.crd.yaml

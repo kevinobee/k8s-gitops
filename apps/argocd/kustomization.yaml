@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: argocd
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 bases:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.1/manifests/install.yaml
 

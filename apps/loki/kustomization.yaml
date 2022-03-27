@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: loki
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 namespace: monitoring
 
 resources:

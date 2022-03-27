@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: gatekeeper
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 bases:
   - https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.7/deploy/gatekeeper.yaml
   - github.com/sighupio/gatekeeper-policy-manager?ref=v0.5.1
