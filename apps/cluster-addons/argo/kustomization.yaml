@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: argo
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 resources:
 - namespace.yaml
 - https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/quick-start-postgres.yaml

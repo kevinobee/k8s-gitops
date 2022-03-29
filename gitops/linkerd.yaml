@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: linkerd
   namespace: argocd
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,10 +12,10 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: HEAD
-    path: apps/argocd
+    path: apps/linkerd
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: linkerd
   syncPolicy:
     automated:
       prune: true

@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: ingress-nginx
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 resources:
   - namespace.yaml
 

@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: kubernetes-dashboard
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 resources:
 - ingress.yaml
 - serviceaccount-admin.yaml

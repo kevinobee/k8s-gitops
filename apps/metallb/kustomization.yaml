@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: metallb
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+  
 resources:
   - github.com/metallb/metallb//manifests?ref=v0.12.1
   - configmap.yaml

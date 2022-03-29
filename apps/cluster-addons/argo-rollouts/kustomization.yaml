@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: argo
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+  
 resources:
 - namespace.yaml
 - https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
