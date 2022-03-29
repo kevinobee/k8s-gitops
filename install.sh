@@ -51,10 +51,13 @@ fi
 if [[ ! $(kubectl get namespace | grep argocd) ]]; then
   echo "Install Argo CD ..."
   kubectl kustomize apps/argocd | kubectl apply -f -
-  kubectl -n argocd wait --timeout 120s --for=condition=Available deployment argocd-server
+  for deploy in "dex-server" "redis" "repo-server" "server"; \
+    do kubectl -n argocd rollout status deploy/argocd-${deploy}; \
+  done
+  kubectl -n argocd rollout status statefulset/argocd-application-controller
 fi
 
-kubectl port-forward svc/argocd-server -n argocd 8080:443 1>/dev/null 2>&1 &
+kubectl -n argocd port-forward svc/argocd-server 8080:443 > /dev/null 2>&1 &
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
 argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
 
@@ -64,12 +67,12 @@ kubectl apply -f gitops.yaml
 
 echo
 echo "Wait for Argo CD to sync applications ..."
-sleep 5s
+argocd app list
 argocd app sync gitops
 
-argocd admin dashboard -n argocd 1>/dev/null 2>&1 &
+echo
+echo "To open the Argo CD dashboard run the command:"
+echo
+echo "argocd admin dashboard -n argocd"
+echo
 
-echo
-echo "Argo CD:     http://localhost:8080"
-echo "Credentials: ${ARGOCD_PWD}"
-echo
