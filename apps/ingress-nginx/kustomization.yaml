@@ -4,6 +4,9 @@ kind: Kustomization
 commonLabels:
   k8s-app: ingress-nginx
 
+commonAnnotations:
+  linkerd.io/inject: enabled
+
 resources:
   - namespace.yaml
 
@@ -14,7 +17,7 @@ helmCharts:
     releaseName: ingress-nginx
     namespace: ingress-nginx
     valuesFile: values.yaml
-    
+
 namespace: ingress-nginx
 
 patchesStrategicMerge:

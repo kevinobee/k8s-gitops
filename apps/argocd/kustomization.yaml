@@ -18,5 +18,6 @@ resources:
 
 patchesStrategicMerge:
   - overlays/argo-cd-cm.yaml
+  - overlays/resource-limits.yaml
 
 namespace: argocd

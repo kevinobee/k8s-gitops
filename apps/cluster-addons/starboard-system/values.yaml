@@ -1,4 +1,0 @@
-targetNamespaces: ''
-
-trivy:
-  ignoreUnfixed: true
