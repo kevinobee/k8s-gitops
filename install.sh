@@ -44,7 +44,7 @@ fi
 
 if [[ ! $(kubectl get namespace | grep linkerd) ]]; then
   echo "Install Service Mesh ..."
-  linkerd install | kubectl apply -f -
+  kubectl kustomize apps/linkerd | kubectl apply -f -
   linkerd check
 fi
 
@@ -71,8 +71,16 @@ argocd app list
 argocd app sync gitops
 
 echo
-echo "To open the Argo CD dashboard run the command:"
+echo "To open the Argo CD dashboard run:"
 echo
 echo "argocd admin dashboard -n argocd"
+echo
+
+echo
+echo "To install and open the Linkerd UI run:"
+echo
+echo "linkerd viz install | kubectl apply -f -"
+echo "linkerd viz check"
+echo "linkerd viz dashboard &"
 echo
 
