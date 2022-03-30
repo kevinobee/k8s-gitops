@@ -6,13 +6,16 @@ commonLabels:
 
 commonAnnotations:
   linkerd.io/inject: enabled
-  
+
 bases:
   # - github.com/argoproj/argo-events/manifests/cluster-install
   # OR
   - github.com/argoproj/argo-events/manifests/namespace-install
 
 resources:
-- namespace.yaml
+  - namespace.yaml
+
+patchesStrategicMerge:
+  - overlays/resource-limits.yaml
 
 namespace: argo-events
