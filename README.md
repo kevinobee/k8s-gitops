@@ -31,29 +31,9 @@ echo ${ARGOCD_PWD}
 
 ## GitOps
 
-To wire up GitOps applications in Argo CD run the following commands after the `install.sh` script:
-
-```shell
-# Create GitOps application in Argo CD (App of Apps)
-kubectl apply -f gitops.yaml
-
-# View Argo CD applications deployment status
-kubectl get applications.argoproj.io -n argocd
-```
+The `install.sh` script will create a `gitops` application in Argo CD following the [App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps) pattern.
 
 After Argo CD has synced the applications the following services will be exposed via a load balancer and ingress:
-
-* Kubernetes dashboard
-
-  <https://k8s.local/>
-
-  Admin access token stored in `K8S_TOKEN` environment variable.
-
-  ```shell
-  K8S_TOKEN_NAME=$(kubectl get secret -n kubernetes-dashboard -o name | grep dashboard-admin-sa-token)
-  export K8S_TOKEN=$(kubectl get $K8S_TOKEN_NAME -n kubernetes-dashboard -o jsonpath='{.data.token}' | base64 --decode)
-  echo ${K8S_TOKEN}
-  ```
 
 * Gatekeeper Policy Manager (GPM)
 
@@ -78,16 +58,26 @@ Setup entries for `.local` domain names in your `/etc/hosts` file by running the
 
 ```shell
 LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "${LB_IP} gpm.local k8s.local loki.local" | sudo tee -a /etc/hosts
+echo "${LB_IP} gpm.local loki.local" | sudo tee -a /etc/hosts
 ```
+
+## CLI Tooling
+
+The `install.sh` script will add a few useful tools to your environment for working with the Kubernetes cluster. The script itself makes use of [argocd](https://argo-cd.readthedocs.io/en/stable/user-guide/commands/argocd/) and [linkerd](https://linkerd.io/2.10/reference/cli/) CLI tooling. Other tools are detailed below:
+
+1. [Octant](https://octant.dev/) is an open source developer-centric web interface for Kubernetes that lets you inspect a Kubernetes cluster and its applications.
+
+    To open the Octant web interface run the command:
+
+    ```shell
+    octant
+    ```
 
 ## Build Automation
 
 Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/workflows/static-analysis.yml) action and [Code scanning alerts](https://github.com/kevinobee/k8s-gitops/security/code-scanning) on GitHub for security and configuration scan results.
 
 ## References
-
-* [Deploying Kubernetes Dashboard with Argo/Kustomize](https://www.frakkingsweet.com/deploying-kubernetes-dashboard-with-argo-kustomize/) blog post
 
 * [Argo CD](https://argoproj.github.io/cd/) declarative, GitOps continuous delivery tool for Kubernetes.
 
