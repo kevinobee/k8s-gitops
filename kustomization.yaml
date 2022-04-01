@@ -4,6 +4,3 @@ kind: Kustomization
 bases:
   - apps
   - policy
-
-resources:
-  - gitops.yaml
