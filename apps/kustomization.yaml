@@ -5,6 +5,7 @@ bases:
   - linkerd
   - argocd
   # disabled - cert-manager
+  - gatekeeper
   - cluster-addons
   - ingress-nginx
   - loki
