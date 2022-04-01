@@ -18,5 +18,5 @@ spec:
     namespace: gatekeeper-system
   syncPolicy:
     automated:
-      prune: true
+      prune: false
       selfHeal: true
