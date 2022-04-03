@@ -8,7 +8,6 @@ commonAnnotations:
   linkerd.io/inject: enabled
 
 resources:
-- namespace.yaml
-- install.yaml
+  - install.yaml
 
 namespace: linkerd-viz
