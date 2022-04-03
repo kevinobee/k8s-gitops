@@ -30,5 +30,5 @@ spec:
         namespace: '{{path.basename}}'
       syncPolicy:
         automated:
-          prune: true
+          prune: false
           selfHeal: true
