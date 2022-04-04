@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: loki-grafana
   namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
 spec:
   ingressClassName: nginx
   rules:
