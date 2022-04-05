@@ -35,7 +35,7 @@ nodes:
             pathType: DirectoryOrCreate
 
   extraMounts:
-  - hostPath: ./audit-policy.yaml
+  - hostPath: cluster/audit-policy.yaml
     containerPath: /etc/kubernetes/policies/audit-policy.yaml
     readOnly: true
     selinuxRelabel: false
