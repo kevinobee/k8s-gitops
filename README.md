@@ -73,6 +73,8 @@ The `install.sh` script will add a few useful tools to your environment for work
     octant
     ```
 
+    The Octant dashboard will be available at <http://127.0.0.1:7777/>
+
 ## Build Automation
 
 Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/workflows/static-analysis.yml) action and [Code scanning alerts](https://github.com/kevinobee/k8s-gitops/security/code-scanning) on GitHub for security and configuration scan results.
