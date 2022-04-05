@@ -52,6 +52,10 @@ After Argo CD has synced the applications the following services will be exposed
   echo ${LOKI_PWD}
   ```
 
+* Litmus UI
+
+  <http://litmus.local/>
+
 ### Host Names
 
 Setup entries for `.local` domain names in your `/etc/hosts` file by running the following commands after the `install.sh` script has completed:
