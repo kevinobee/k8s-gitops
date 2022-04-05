@@ -68,7 +68,7 @@ kubectl apply -f gitops.yaml
 echo
 echo "Wait for Argo CD to sync applications ..."
 argocd app list
-argocd app sync gitops
+argocd app sync gitops --force
 
 echo
 echo "To open the Argo CD dashboard run:"
