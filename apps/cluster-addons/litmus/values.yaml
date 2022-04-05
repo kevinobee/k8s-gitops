@@ -1,0 +1,12 @@
+ingress:
+  enabled: true
+  host:
+    name: litmus.172.18.0.200.nip.io
+
+# portal:
+#   frontend:
+#     nodeSelector: "node-type=observability"
+#   server:
+#     nodeSelector: "node-type=observability"
+#   mongo:
+#     nodeSelector: "node-type=observability"
