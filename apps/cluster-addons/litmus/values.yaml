@@ -3,10 +3,13 @@ ingress:
   host:
     name: litmus.local
 
-# portal:
-#   frontend:
-#     nodeSelector: "node-type=observability"
-#   server:
-#     nodeSelector: "node-type=observability"
-#   mongo:
-#     nodeSelector: "node-type=observability"
+portal:
+  frontend:
+    nodeSelector:
+      node-type: observability
+  server:
+    nodeSelector:
+      node-type: observability
+  mongo:
+    nodeSelector:
+      node-type: observability
