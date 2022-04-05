@@ -58,7 +58,7 @@ Setup entries for `.local` domain names in your `/etc/hosts` file by running the
 
 ```shell
 LB_IP=$(kubectl get svc -n ingress-nginx ingress-nginx-controller -o jsonpath="{.status.loadBalancer.ingress[0].ip}")
-echo "${LB_IP} gpm.local loki.local" | sudo tee -a /etc/hosts
+echo "${LB_IP} gpm.local litmus.local loki.local" | sudo tee -a /etc/hosts
 ```
 
 ## CLI Tooling

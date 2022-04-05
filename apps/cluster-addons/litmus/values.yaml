@@ -1,7 +1,7 @@
 ingress:
   enabled: true
   host:
-    name: litmus.172.18.0.200.nip.io
+    name: litmus.local
 
 # portal:
 #   frontend:
