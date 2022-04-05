@@ -1,0 +1,15 @@
+ingress:
+  enabled: true
+  host:
+    name: litmus.local
+
+portal:
+  frontend:
+    nodeSelector:
+      node-type: observability
+  server:
+    nodeSelector:
+      node-type: observability
+  mongo:
+    nodeSelector:
+      node-type: observability
