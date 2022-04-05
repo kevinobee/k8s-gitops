@@ -4,7 +4,7 @@ kind: Kustomization
 bases:
   - linkerd
   - argocd
-  # disabled - cert-manager
+  - cert-manager
   - gatekeeper
   - cluster-addons
   - ingress-nginx
