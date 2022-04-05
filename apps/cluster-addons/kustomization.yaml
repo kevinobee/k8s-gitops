@@ -7,4 +7,5 @@ bases:
   - argo-rollouts
   - gatekeeper-system
   - linkerd-viz
+  - litmus
   - starboard-system

@@ -36,6 +36,7 @@
       "Kubescape",
       "Kustomization",
       "linkerd",
+      "litmuschaos",
       "metallb",
       "nodeport",
       "openpolicyagent",
