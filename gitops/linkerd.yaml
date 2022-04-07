@@ -15,6 +15,4 @@ spec:
     server: https://kubernetes.default.svc
     namespace: linkerd
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: {}

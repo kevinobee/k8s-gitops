@@ -17,6 +17,4 @@ spec:
     server: https://kubernetes.default.svc
     namespace: gatekeeper-system
   syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
+    automated: {}
