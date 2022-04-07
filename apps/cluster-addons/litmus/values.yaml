@@ -1,0 +1,5 @@
+ingress:
+  enabled: true
+  host:
+    name: litmus.local
+
