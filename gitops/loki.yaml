@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: loki
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -17,6 +15,4 @@ spec:
     server: https://kubernetes.default.svc
     namespace: monitoring
   syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
+    automated: {}
