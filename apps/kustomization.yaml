@@ -6,6 +6,7 @@ bases:
   - argocd
   - cert-manager
   - gatekeeper
+  - gatekeeper-library
   - cluster-addons
   - ingress-nginx
   - loki
