@@ -25,14 +25,13 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'config'
+          hide-progress: false
+          format: 'table'
           exit-code: '1'
           ignore-unfixed: true
-          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
-          format: 'sarif'
-          output: 'trivy-iac-results.sarif'
+          severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
-        if: always()
         with:
-          sarif_file: 'trivy-iac-results.sarif'
+          sarif_file: 'trivy-results.sarif'
