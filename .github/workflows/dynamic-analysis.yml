@@ -1,17 +1,9 @@
-name: Dynamic Analysis - Argo CD App of Apps
+name: Dynamic Analysis
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'apps/**'
-      - 'gitops/**'
 
-  pull_request:
-    branches: [ main ]
-    paths:
-      - 'apps/**'
-      - 'gitops/**'
+  schedule:
+    - cron: '0 5 * * *'  # 5 minutes past midnight every day
 
   workflow_dispatch:
 
