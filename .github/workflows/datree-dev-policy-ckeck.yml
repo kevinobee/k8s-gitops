@@ -2,9 +2,9 @@ name: K8S Policy Check
 
 on:
   push:
-    paths:
-      - 'apps/**'
-      - 'gitops/**'
+    paths-ignore:
+      - '.github/**'
+      - '**/*.md'
 
   workflow_dispatch:
 

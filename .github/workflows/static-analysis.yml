@@ -3,15 +3,13 @@ name: Static Analysis
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'apps/**'
-      - 'gitops/**'
+    paths-ignore:
+      - '**/*.md'
 
   pull_request:
     branches: [ main ]
-    paths:
-      - 'apps/**'
-      - 'gitops/**'
+    paths-ignore:
+      - '**/*.md'
 
   workflow_dispatch:
 
