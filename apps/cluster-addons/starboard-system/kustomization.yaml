@@ -15,8 +15,8 @@ resources:
   # - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/clusterconfigauditreports.crd.yaml
   # - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/clustervulnerabilityreports.crd.yaml
   - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/configauditreports.crd.yaml
-  # - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/kubehunterreports.crd.yaml
   - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/vulnerabilityreports.crd.yaml
+  - https://raw.githubusercontent.com/aquasecurity/starboard/main/deploy/crd/kubehunterreports.crd.yaml
 
 helmCharts:
   - name: starboard-operator
