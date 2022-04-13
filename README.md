@@ -31,7 +31,12 @@ echo ${ARGOCD_PWD}
 
 ## GitOps
 
-The `install.sh` script will create a `gitops` application in Argo CD following the [App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps) pattern.
+After running the `install.sh` script create the `gitops` application in Argo CD following the [App of Apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#app-of-apps) pattern. Run the following commands:
+
+```shell
+kubectl apply -f gitops.yaml
+argocd app sync gitops
+```
 
 After Argo CD has synced the applications the following services will be exposed via a load balancer and ingress:
 

@@ -62,21 +62,26 @@ export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o 
 argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
 
 echo
-echo "Create GitOps application in Argo CD (App of Apps) ..."
-kubectl apply -f gitops.yaml
-
 echo
-echo "Wait for Argo CD to sync applications ..."
-argocd app list
-argocd app sync gitops --force
-
+echo "To create GitOps application in Argo CD (App of Apps) run:"
+echo
+echo "kubectl apply -f gitops.yaml"
+echo "argocd app sync gitops"
+echo "argocd app wait gitops --health"
+# echo "argocd app wait -l app.kubernetes.io/instance=gitops --sync"
+echo
 echo
 echo "To open the Argo CD dashboard run:"
 echo
 echo "argocd admin dashboard -n argocd"
 echo
+echo
 echo "To open the Linkerd UI run:"
 echo
 echo "linkerd viz dashboard"
 echo
-
+echo
+echo "To manually install applications into the cluster run:"
+echo
+echo "kubectl kustomize --enable-helm apps | k apply -f -"
+echo

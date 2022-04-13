@@ -20,9 +20,15 @@ jobs:
       run: |
         ./install.sh
 
+    - name: Create GitOps application in Argo CD (App of Apps)
+      run: |
+        kubectl apply -f gitops.yaml
+        argocd app sync gitops
+
     - name: Wait for GitOps to be Healthy
       run: |
         argocd app wait gitops --health
+        argocd app list
 
     - name: Docker network checks
       run: |
