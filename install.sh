@@ -42,13 +42,13 @@ if ! kind get clusters --quiet; then
   kubectl cluster-info --context kind-kind
 fi
 
-if ! kubectl get namespace linkerd; then
+if [[ ! $(kubectl get namespace linkerd) ]]; then
   echo "Install Service Mesh ..."
   kubectl kustomize apps/linkerd | kubectl apply -f -
   linkerd check
 fi
 
-if ! kubectl get namespace argocd; then
+if [[ ! $(kubectl get namespace argocd) ]]; then
   echo "Install Argo CD ..."
   kubectl kustomize apps/argocd | kubectl apply -f -
   for deploy in "dex-server" "redis" "repo-server" "server"; \
