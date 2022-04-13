@@ -47,6 +47,7 @@
       "rollouts",
       "sarif",
       "serviceaccount",
+      "shellcheck",
       "sighupio",
       "sigs",
       "Snyk",
