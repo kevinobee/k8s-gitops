@@ -9,7 +9,7 @@ set -o nounset;
 # set -x;
 
 # Homebrew on Linux - ref: https://brew.sh/
-if [ ! $(which brew) ]; then
+if ! which brew ; then
   (
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   )
@@ -30,13 +30,13 @@ brewTools=( \
 
 for i in "${brewTools[@]}"
 do
-  if [ ! $(which "${i}") ]; then
+  if ! which "${i}"; then
     echo "Installing ${i} CLI ... "
     brew install "${i}"
   fi
 done
 
-if [ ! $(kind get clusters --quiet) ]; then
+if ! kind get clusters --quiet; then
   kind create cluster --config kind-config.yaml --wait 1m
   kubectl wait node --all --for condition=ready
   kubectl cluster-info --context kind-kind
