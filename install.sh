@@ -67,6 +67,7 @@ echo "To create GitOps application in Argo CD (App of Apps) run:"
 echo
 echo "kubectl apply -f gitops.yaml"
 echo "argocd app sync gitops"
+echo "argocd app sync -l app.kubernetes.io/instance=gitops   # sync apps that are children of another app (aka app-of-apps)"
 echo
 echo
 echo "To open the Argo CD dashboard run:"
