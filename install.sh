@@ -30,9 +30,9 @@ brewTools=( \
 
 for i in "${brewTools[@]}"
 do
-  if [ ! $(which ${i}) ]; then
+  if [ ! $(which "${i}") ]; then
     echo "Installing ${i} CLI ... "
-    brew install ${i}
+    brew install "${i}"
   fi
 done
 
@@ -59,7 +59,7 @@ fi
 
 kubectl -n argocd port-forward svc/argocd-server 8080:443 > /dev/null 2>&1 &
 export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
+argocd login localhost:8080 --insecure --username admin --password "${ARGOCD_PWD}"
 
 echo
 echo "Create GitOps application in Argo CD (App of Apps) ..."
