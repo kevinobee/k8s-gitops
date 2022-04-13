@@ -9,7 +9,7 @@ set -o nounset;
 # set -x;
 
 # Homebrew on Linux - ref: https://brew.sh/
-if [ ! $(which brew) ]; then
+if [[ ! $(which brew) ]]; then
   (
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   )
@@ -30,25 +30,25 @@ brewTools=( \
 
 for i in "${brewTools[@]}"
 do
-  if [ ! $(which ${i}) ]; then
+  if [[ ! $(which "${i}") ]]; then
     echo "Installing ${i} CLI ... "
-    brew install ${i}
+    brew install "${i}"
   fi
 done
 
-if [ ! $(kind get clusters --quiet) ]; then
+if [[ ! $(kind get clusters --quiet) ]]; then
   kind create cluster --config kind-config.yaml --wait 1m
   kubectl wait node --all --for condition=ready
   kubectl cluster-info --context kind-kind
 fi
 
-if [[ ! $(kubectl get namespace | grep linkerd) ]]; then
+if [[ ! $(kubectl get namespace linkerd) ]]; then
   echo "Install Service Mesh ..."
   kubectl kustomize apps/linkerd | kubectl apply -f -
   linkerd check
 fi
 
-if [[ ! $(kubectl get namespace | grep argocd) ]]; then
+if [[ ! $(kubectl get namespace argocd) ]]; then
   echo "Install Argo CD ..."
   kubectl kustomize apps/argocd | kubectl apply -f -
   for deploy in "dex-server" "redis" "repo-server" "server"; \
@@ -58,8 +58,9 @@ if [[ ! $(kubectl get namespace | grep argocd) ]]; then
 fi
 
 kubectl -n argocd port-forward svc/argocd-server 8080:443 > /dev/null 2>&1 &
-export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
+ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
+export ARGOCD_PWD
+argocd login localhost:8080 --insecure --username admin --password "${ARGOCD_PWD}"
 
 echo
 echo

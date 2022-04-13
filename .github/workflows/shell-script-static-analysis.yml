@@ -1,0 +1,28 @@
+name: Shell Script scan
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '**/*.sh'
+
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '**/*.sh'
+
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: ShellCheck lint script analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install ShellCheck CLI
+        run: sudo apt install shellcheck
+
+      - name: Run ShellCheck
+        run: shellcheck install.sh
