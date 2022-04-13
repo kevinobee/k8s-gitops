@@ -62,14 +62,10 @@ export ARGOCD_PWD=$(kubectl -n argocd get secret argocd-initial-admin-secret -o 
 argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
 
 echo
-echo "Create GitOps application in Argo CD (App of Apps) ..."
-kubectl apply -f gitops.yaml
-
+echo "To create GitOps application in Argo CD (App of Apps) run:"
 echo
-echo "Wait for Argo CD to sync applications ..."
-argocd app list
-argocd app sync gitops --force
-
+echo "kubectl apply -f gitops.yaml"
+echo "argocd app sync gitops"
 echo
 echo "To open the Argo CD dashboard run:"
 echo
