@@ -21,11 +21,6 @@ brewTools=( \
   "argocd" \
   "linkerd" \
   "octant"
-
-  # useful tools:
-  #   "argo"
-  #   "kubectx"
-  #   "kubeseal
 )
 
 for i in "${brewTools[@]}"
@@ -79,6 +74,11 @@ echo
 echo "To open the Linkerd UI run:"
 echo
 echo "linkerd viz dashboard"
+echo
+echo
+echo "To install useful CLI tools run:"
+echo
+echo "brew install argo kubectx kubeseal"
 echo
 echo
 echo "To manually install applications into the cluster run:"
