@@ -28,6 +28,10 @@ jobs:
     - name: Wait for GitOps to be Healthy
       run: |
         argocd app wait gitops --health
+        argocd app wait -l app.kubernetes.io/instance=gitops --sync
+
+    - name: List GitOps applications
+      run: |
         argocd app list
 
     - name: Docker network checks
