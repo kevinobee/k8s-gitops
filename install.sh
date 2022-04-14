@@ -63,7 +63,7 @@ echo
 echo "kubectl apply -f gitops.yaml"
 echo "argocd app sync gitops"
 echo "argocd app wait gitops --health"
-# echo "argocd app wait -l app.kubernetes.io/instance=gitops --sync"
+echo "argocd app wait -l app.kubernetes.io/instance=gitops --sync"
 echo
 echo
 echo "To open the Argo CD dashboard run:"
