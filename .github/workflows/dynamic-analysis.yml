@@ -23,10 +23,10 @@ jobs:
     - name: Create GitOps application in Argo CD (App of Apps)
       run: |
         kubectl apply -f gitops.yaml
-        argocd app sync gitops
 
-    - name: Wait for GitOps to be Healthy
+    - name: Sync GitOps applications
       run: |
+        argocd app sync gitops
         argocd app wait gitops --health
         argocd app wait -l app.kubernetes.io/instance=gitops --sync
 
