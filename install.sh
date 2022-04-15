@@ -68,6 +68,9 @@ echo "To open the Argo CD dashboard run:"
 echo
 echo "argocd admin dashboard -n argocd"
 echo
+echo "   user:     admin"
+echo "   password: ${ARGOCD_PWD}"
+echo
 echo
 echo "To open the Linkerd UI run:"
 echo
