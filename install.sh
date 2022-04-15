@@ -73,7 +73,9 @@ echo
 echo
 echo "To open the Linkerd UI run:"
 echo
-echo "linkerd viz dashboard"
+echo "linkerd viz install | kubectl apply -f -"
+echo "linkerd viz check"
+echo "linkerd viz dashboard &"
 echo
 echo
 echo "To install useful CLI tools run:"
