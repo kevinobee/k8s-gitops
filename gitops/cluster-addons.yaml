@@ -14,8 +14,6 @@ spec:
       - path: apps/cluster-addons/*
       - exclude: true
         path: apps/cluster-addons/argo-rollouts
-      - exclude: true
-        path: apps/cluster-addons/linkerd-viz
   template:
     metadata:
       name: '{{path.basename}}'
