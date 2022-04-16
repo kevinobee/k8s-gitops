@@ -29,7 +29,6 @@ jobs:
       run: |
         argocd app sync gitops
         argocd app wait gitops --health
-        argocd app wait -l app.kubernetes.io/instance=gitops --sync
 
     - name: List applications
       run: |
