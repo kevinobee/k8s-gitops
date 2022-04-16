@@ -96,8 +96,6 @@ Refer to the [Static Analysis](https://github.com/kevinobee/k8s-gitops/actions/w
 
 ### Security and Configuration
 
-* [Datree](https://www.datree.io/)
-
 * [Kubescape](https://hub.armo.cloud/docs)
 
 * [kube-score](https://github.com/zegl/kube-score)

@@ -13,9 +13,6 @@ on:
 
   workflow_dispatch:
 
-env:
-  DATREE_TOKEN: ${{ secrets.DATREE_TOKEN }}
-
 jobs:
 
   kustomize:
@@ -50,23 +47,6 @@ jobs:
 
       - name: Run Kubescape scan for DevOps issues
         run: kubescape scan framework devopsbest --exclude-namespaces kube-system,kube-public kustomize.yaml # --enable-host-scan --fail-threshold 0
-
-  datree:
-    name: Datree
-    needs: kustomize
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Install Datree
-        run: curl https://get.datree.io | /bin/bash
-
-      - name: Download Kustomize YAML
-        uses: actions/download-artifact@v2
-        with:
-          name: kustomize
-
-      - name: Run Datree to check for Kubernetes misconfiguration issues
-        run: datree test --schema-version 1.21.0 --ignore-missing-schemas kustomize.yaml || exit 0
 
   kube-score:
     name: kube-score
