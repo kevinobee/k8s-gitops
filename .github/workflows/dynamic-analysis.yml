@@ -25,12 +25,13 @@ jobs:
       run: |
         kubectl apply -f gitops.yaml
 
-    - name: Sync GitOps applications
+    - name: Sync applications
       run: |
         argocd app sync gitops
         argocd app wait gitops --health
+        argocd app wait -l app.kubernetes.io/instance=gitops --sync
 
-    - name: List GitOps applications
+    - name: List applications
       run: |
         argocd app list
 
