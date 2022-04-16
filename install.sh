@@ -56,6 +56,14 @@ argocd login localhost:8080 --insecure --username admin --password ${ARGOCD_PWD}
 
 echo
 echo
+echo "To open the Argo CD dashboard run:"
+echo
+echo "argocd admin dashboard -n argocd"
+echo
+echo "   user:     admin"
+echo "   password: ${ARGOCD_PWD}"
+echo
+echo
 echo "To create GitOps application in Argo CD (App of Apps) run:"
 echo
 echo "kubectl apply -f gitops.yaml"
@@ -63,14 +71,6 @@ echo "argocd app sync gitops"
 echo "argocd app wait gitops --health"
 echo "argocd app sync -l app.kubernetes.io/instance=gitops"
 echo "argocd app wait -l app.kubernetes.io/instance=gitops --sync"
-echo
-echo
-echo "To open the Argo CD dashboard run:"
-echo
-echo "argocd admin dashboard -n argocd"
-echo
-echo "   user:     admin"
-echo "   password: ${ARGOCD_PWD}"
 echo
 echo
 echo "To open the Linkerd UI run:"
