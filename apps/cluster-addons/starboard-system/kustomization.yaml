@@ -24,7 +24,7 @@ helmCharts:
     version: 0.9.1
     releaseName: starboard-operator
     namespace: starboard-system
-    valuesFile: values.yaml
+    valuesFile: operator-values.yaml
 
   - name: starboard-exporter
     repo: https://giantswarm.github.io/giantswarm-catalog
