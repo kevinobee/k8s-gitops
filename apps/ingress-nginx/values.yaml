@@ -4,27 +4,27 @@ controller:
 
   resources:
     limits:
-      cpu: 100m
-      memory: 90Mi
+      cpu: "100m"
+      memory: "90Mi"
     requests:
-      cpu: 100m
-      memory: 90Mi
+      cpu: "100m"
+      memory: "90Mi"
 
   admissionWebhooks:
     createSecretJob:
       resources:
         limits:
-          cpu: 10m
-          memory: 20Mi
+          cpu: "10m"
+          memory: "20Mi"
         requests:
-          cpu: 10m
-          memory: 20Mi
+          cpu: "10m"
+          memory: "20Mi"
 
     patchWebhookJob:
       resources:
         limits:
-          cpu: 10m
-          memory: 20Mi
+          cpu: "10m"
+          memory: "20Mi"
         requests:
-          cpu: 10m
-          memory: 20Mi
+          cpu: "10m"
+          memory: "20Mi"
