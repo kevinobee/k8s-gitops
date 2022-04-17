@@ -21,7 +21,7 @@ resources:
 helmCharts:
   - name: starboard-operator
     repo: https://aquasecurity.github.io/helm-charts/
-    version: 0.9.1
+    version: 0.10.4
     releaseName: starboard-operator
     namespace: starboard-system
     valuesFile: values.yaml
