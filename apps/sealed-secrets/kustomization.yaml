@@ -10,6 +10,6 @@ commonAnnotations:
 helmCharts:
   - name: sealed-secrets
     repo: https://bitnami-labs.github.io/sealed-secrets
-    version: 2.1.4
+    version: 2.1.5
     releaseName: sealed-secrets
     namespace: kube-system
