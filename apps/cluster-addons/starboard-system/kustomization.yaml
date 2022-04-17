@@ -28,7 +28,7 @@ helmCharts:
 
   - name: starboard-exporter
     repo: https://giantswarm.github.io/giantswarm-catalog
-    version: 0.3.0
+    version: 0.3.3
     releaseName: starboard-exporter
     namespace: starboard-system
 
