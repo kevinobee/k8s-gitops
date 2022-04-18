@@ -34,6 +34,28 @@ jobs:
       run: |
         argocd app list
 
+    - name: Application namespace checks
+      run: |
+        ns=( \
+          "argo" \
+          "argo-events" \
+          "argo-rollouts" \
+          "argocd" \
+          "cert-manager" \
+          "gatekeeper-system" \
+          "ingress-nginx" \
+          "linkerd" \
+          "litmus" \
+          "metallb-system" \
+          "monitoring" \
+          "starboard-system"
+        )
+
+        for i in "${ns[@]}"
+        do
+          kubectl get ns "${i}"
+        done
+
     - name: Docker network checks
       run: |
         docker network inspect -f '{{.IPAM.Config}}' kind
