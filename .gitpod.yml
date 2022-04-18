@@ -1,12 +1,8 @@
 
-# tasks:
-#   - init: |
-#       echo 'TODO: build project'
-#     command: |
-#       echo 'TODO: start app'
 vscode:
   extensions:
     - kubescape.kubescape
     - ms-kubernetes-tools.vscode-kubernetes-tools
     - streetsidesoftware.code-spell-checker
     - eamodio.gitlens
+    - redhat.vscode-yaml
