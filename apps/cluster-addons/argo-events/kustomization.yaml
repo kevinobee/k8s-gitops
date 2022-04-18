@@ -6,13 +6,15 @@ commonLabels:
 
 commonAnnotations:
   linkerd.io/inject: enabled
-  
-bases:
-  # - github.com/argoproj/argo-events/manifests/cluster-install
-  # OR
-  - github.com/argoproj/argo-events/manifests/namespace-install
 
 resources:
 - namespace.yaml
+
+helmCharts:
+  - name: argo-events
+    repo: https://argoproj.github.io/argo-helm
+    version: 1.12.0
+    releaseName: argo-events
+    namespace: argo-events
 
 namespace: argo-events
