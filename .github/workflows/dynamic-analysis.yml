@@ -30,12 +30,8 @@ jobs:
         argocd app sync gitops
         argocd app wait gitops --health
 
-        argocd_apps=($(argocd app list -l app.kubernetes.io/instance=gitops -o name))
-
-        for argocd_app in "${argocd_apps[@]}"
-        do
-          argocd app sync ${argocd_app}
-        done
+        argocd app sync -l app.kubernetes.io/instance=gitops --async
+        argocd app wait -l app.kubernetes.io/instance=gitops --sync
 
     - name: List applications
       run: |
