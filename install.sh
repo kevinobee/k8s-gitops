@@ -81,7 +81,7 @@ echo
 echo
 echo "To install useful CLI tools run:"
 echo
-echo "brew install argo kubectx kubeseal"
+echo "brew install argo kubectx kubeseal argoproj/tap/kubectl-argo-rollouts"
 echo
 echo
 echo "To manually install applications into the cluster run:"
