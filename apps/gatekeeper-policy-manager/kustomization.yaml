@@ -10,7 +10,7 @@ commonAnnotations:
 bases:
   - github.com/sighupio/gatekeeper-policy-manager?ref=v0.5.1
 
+namespace: gatekeeper-system
+
 resources:
   - ingress.yaml
-
-namespace: gatekeeper-system
