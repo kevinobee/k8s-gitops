@@ -30,8 +30,8 @@ jobs:
         argocd app sync gitops
         argocd app wait gitops --health
 
-        argocd app sync -l app.kubernetes.io/instance=gitops --async
-        argocd app wait -l app.kubernetes.io/instance=gitops --sync
+        # argocd app sync -l app.kubernetes.io/instance=gitops --async
+        # argocd app wait -l app.kubernetes.io/instance=gitops --sync
 
     - name: List applications
       run: |
