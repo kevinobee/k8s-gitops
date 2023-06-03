@@ -5,6 +5,5 @@ bases:
   - argo
   - argo-events
   - argo-rollouts
-  - gatekeeper-system
   - litmus
   - starboard-system

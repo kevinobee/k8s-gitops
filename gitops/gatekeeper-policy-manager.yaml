@@ -1,10 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: policy
+  name: gatekeeper-policy-manager
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -12,7 +10,7 @@ spec:
   source:
     repoURL: 'https://github.com/kevinobee/k8s-gitops.git'
     targetRevision: HEAD
-    path: policy
+    path: apps/gatekeeper-policy-manager
   destination:
     server: https://kubernetes.default.svc
     namespace: gatekeeper-system
